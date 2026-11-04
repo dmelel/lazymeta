@@ -35,3 +35,4 @@ def test_live_server(tmp_path):
     assert camp["folder_name"] == "daily_cat_blogs"
     assert camp["total_posts"] == 9
     assert len(camp["posts"]) == 9
+

@@ -81,3 +81,38 @@ def test_load_campaign_data(tmp_path: Path):
     assert posts[0]["images"][0]["dimensions"] == "200x200"
     assert posts[1]["is_ready"] is False
     assert posts[1]["images"][0]["exists"] is False
+
+
+def test_sanitize_and_stamp_image(tmp_path: Path):
+    from lazymeta.studio.sanitizer import sanitize_and_stamp_image
+    from PIL.ExifTags import Base
+
+    # Create dummy image
+    test_img = Image.new("RGBA", (300, 300), color=(100, 200, 255, 255))
+    src_file = tmp_path / "raw_ai_input.png"
+    test_img.save(src_file, "PNG")
+
+    out_file = tmp_path / "sanitized_output.jpg"
+    stats = sanitize_and_stamp_image(
+        input_source=src_file,
+        target_path=out_file,
+        author="r1fat.pages.dev"
+    )
+
+    assert stats["success"] is True
+    assert out_file.exists()
+
+    raw_bytes = out_file.read_bytes()
+    assert b"c2pa" not in raw_bytes
+    assert b"SynthID" not in raw_bytes
+    assert b"r1fat.pages.dev" in raw_bytes
+    assert b"LazyMeta" in raw_bytes
+
+    with Image.open(out_file) as im:
+        ex = im.getexif()
+        assert ex.get(Base.Make) == "Apple"
+        assert ex.get(Base.Model) == "iPhone 15 Pro"
+        assert ex.get(Base.Artist) == "r1fat.pages.dev"
+        assert "LazyMeta" in ex.get(Base.Software)
+
+

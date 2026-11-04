@@ -369,18 +369,16 @@ class StudioRequestHandler(BaseHTTPRequestHandler):
                     image_data = image_data.split(",", 1)[1]
                 raw_bytes = base64.b64decode(image_data)
 
-                # Convert/Optimize via Pillow into canonical .jpg
+                # Convert, sanitize AI traces, and inject iPhone EXIF & LazyMeta/r1fat.pages.dev stamps
                 target_filename = f"{int(post_id):02d}.jpg"
                 target_path = images_dir / target_filename
 
-                with Image.open(io.BytesIO(raw_bytes)) as img:
-                    if img.mode in ("RGBA", "P"):
-                        # Flatten onto obsidian background
-                        bg = Image.new("RGB", img.size, (11, 15, 23))
-                        bg.paste(img, mask=img.split()[3] if img.mode == "RGBA" else None)
-                        bg.save(target_path, "JPEG", quality=95, optimize=True)
-                    else:
-                        img.convert("RGB").save(target_path, "JPEG", quality=95, optimize=True)
+                from lazymeta.studio.sanitizer import sanitize_and_stamp_image
+                sanitize_and_stamp_image(
+                    input_source=raw_bytes,
+                    target_path=target_path,
+                    quality=95
+                )
 
                 # Update captions.json
                 captions_file = folder_path / "captions.json"
@@ -628,6 +626,34 @@ class StudioRequestHandler(BaseHTTPRequestHandler):
                 })
             except Exception as e:
                 self.send_error_json(f"Scheduling failed: {e}", status=500)
+            return
+
+        # 6. API: Sanitize & Stamp All Images
+        if path == "/api/sanitize_all":
+            folder_str = req_data.get("folder")
+            if not folder_str:
+                self.send_error_json("Folder path is required")
+                return
+
+            try:
+                from lazymeta.studio.sanitizer import sanitize_and_stamp_image
+                folder_path = Path(folder_str).resolve()
+                images_dir = folder_path / "images"
+                if not images_dir.exists():
+                    self.send_error_json("Images directory not found", status=404)
+                    return
+
+                sanitized = []
+                for img_path in sorted(list(images_dir.glob("*.jpg")) + list(images_dir.glob("*.png")) + list(images_dir.glob("*.webp"))):
+                    target_jpg = images_dir / f"{img_path.stem}.jpg"
+                    res = sanitize_and_stamp_image(img_path, target_jpg)
+                    if img_path.suffix.lower() != ".jpg" and img_path.exists() and target_jpg.exists():
+                        img_path.unlink()
+                    sanitized.append(res["filename"])
+
+                self.send_json({"success": True, "count": len(sanitized), "files": sanitized})
+            except Exception as e:
+                self.send_error_json(str(e), status=500)
             return
 
         self.send_error_json("Route not found", status=404)

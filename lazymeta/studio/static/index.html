@@ -243,6 +243,12 @@
             <span>Doctor</span>
           </button>
 
+          <!-- Sanitize & Stamp Images -->
+          <button id="sanitizeAllBtn" class="apple-glass-pill hover:bg-purple-500/20 text-white/80 hover:text-white px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all border border-purple-500/20" title="Scrub AI metadata & stamp with LazyMeta and r1fat.pages.dev">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-purple-400"></i>
+            <span class="hidden sm:inline">Sanitize & Stamp</span>
+          </button>
+
           <!-- Schedule Queue to Meta -->
           <button id="openScheduleModalBtn" class="gradient-btn text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-lg shadow-pink-500/20 hover:scale-105 transition-all">
             <i data-lucide="send" class="w-3.5 h-3.5"></i>
@@ -1076,6 +1082,27 @@
         }
       } catch (err) {
         showToast("Doctor Error", err.message, false);
+      }
+    });
+
+    // Sanitize & Stamp All Photos
+    document.getElementById('sanitizeAllBtn').addEventListener('click', async () => {
+      if (!campaignData || !campaignData.folder_path) return;
+      showToast("Sanitizing Images...", "Purging C2PA & injecting r1fat.pages.dev stamp...");
+      try {
+        const res = await fetch('/api/sanitize_all', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ folder: campaignData.folder_path })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || "Sanitization failed");
+        }
+        showToast("Sanitized & Stamped! 🛡️", `Protected ${data.count} photos with r1fat.pages.dev & iPhone EXIF.`);
+        await fetchCampaign(campaignData.folder_path);
+      } catch (err) {
+        showToast("Sanitize Error", err.message, false);
       }
     });
 
