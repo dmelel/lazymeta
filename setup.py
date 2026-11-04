@@ -13,7 +13,12 @@ setup(
         "rich>=13.0.0",
         "python-dotenv>=1.0.0",
         "urllib3>=1.26.0",
+        "Pillow>=10.0.0",
     ],
+    package_data={
+        "lazymeta.studio": ["static/*"],
+    },
+    include_package_data=True,
     entry_points={
         "console_scripts": [
             "lazymeta = lazymeta.cli:main",

@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LazyMeta Studio · Apple Glass Edition</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Segoe UI"', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            cosmic: '#070814',
+            surface: 'rgba(255, 255, 255, 0.04)',
+            glassBorder: 'rgba(255, 255, 255, 0.12)',
+            neonPurple: '#8B5CF6',
+            neonPink: '#EC4899',
+            neonBlue: '#3B82F6',
+            neonCyan: '#06B6D4',
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float-slow': 'float 8s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Apple Glassmorphism Core */
+    body {
+      background-color: #070814;
+      color: #F3F4F6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .apple-glass {
+      background: rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .apple-glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .apple-glass-card:hover {
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 24px 60px rgba(139, 92, 246, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .apple-glass-pill {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .apple-glass-inset {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Ambient background gradient meshes */
+    .ambient-glow-1 {
+      position: fixed;
+      top: -10%;
+      left: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.28) 0%, rgba(139, 92, 246, 0) 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      top: 20%;
+      right: 5%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.22) 0%, rgba(236, 72, 153, 0) 70%);
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-3 {
+      position: fixed;
+      bottom: -15%;
+      left: 30%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0) 70%);
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Gradient Text & Highlights */
+    .gradient-text-neon {
+      background: linear-gradient(135deg, #C084FC 0%, #F472B6 50%, #60A5FA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gradient-btn {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(236, 72, 153, 0.8) 100%);
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .gradient-btn:hover {
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.95) 0%, rgba(219, 39, 119, 0.95) 100%);
+      box-shadow: 0 12px 32px rgba(236, 72, 153, 0.4);
+    }
+
+    /* Drag & Drop Neon Halo */
+    .dropzone-active {
+      border-color: #EC4899 !important;
+      background: rgba(236, 72, 153, 0.12) !important;
+      box-shadow: 0 0 35px rgba(236, 72, 153, 0.35) !important;
+      transform: scale(1.02);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070814;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8 relative selection:bg-pink-500/30 selection:text-white">
+
+  <!-- Ambient Glowing Orbs -->
+  <div class="ambient-glow-1 animate-pulse-slow"></div>
+  <div class="ambient-glow-2"></div>
+  <div class="ambient-glow-3 animate-float-slow"></div>
+
+  <div class="max-w-[1700px] mx-auto relative z-10 space-y-6">
+
+    <!-- FLOATING GLASS NAV ISLAND -->
+    <header class="apple-glass rounded-3xl p-5 sticky top-4 z-40 transition-all duration-300">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+        
+        <!-- Left: Logo & Folder Selector -->
+        <div class="flex items-center gap-4 flex-wrap">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 via-pink-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/30 border border-white/20">
+              <i data-lucide="layers" class="w-5 h-5 text-white"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-xl tracking-tight gradient-text-neon">LazyMeta</span>
+                <span class="text-xs uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 font-semibold border border-white/10">Studio</span>
+              </div>
+              <p class="text-[11px] text-white/50 tracking-wide">VisionOS Glassmorphism Content Engine</p>
+            </div>
+          </div>
+
+          <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
+
+          <!-- Campaign Folder Button -->
+          <button id="openFolderModalBtn" class="apple-glass-pill hover:bg-white/10 text-white px-4 py-2 rounded-2xl flex items-center gap-2 text-sm transition-all shadow-sm group">
+            <i data-lucide="folder" class="w-4 h-4 text-purple-400 group-hover:text-pink-400 transition-colors"></i>
+            <span class="font-medium text-white/90" id="currentFolderName">Loading folder...</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-white/40"></i>
+          </button>
+        </div>
+
+        <!-- Middle: Progress & Fast Filters -->
+        <div class="flex items-center gap-3 w-full lg:w-auto justify-center flex-wrap">
+          <!-- Progress Pill -->
+          <div class="apple-glass-pill px-4 py-1.5 rounded-2xl flex items-center gap-3">
+            <div class="text-xs">
+              <span class="text-white/60">Images:</span>
+              <span class="font-bold text-white ml-1" id="progressStatsText">0 / 0</span>
+              <span class="text-pink-400 font-semibold ml-1" id="progressPercentText">(0%)</span>
+            </div>
+            <div class="w-28 h-2 rounded-full bg-white/10 overflow-hidden relative">
+              <div id="progressBarFill" class="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Filter Switcher -->
+          <div class="apple-glass-inset p-1 rounded-2xl flex items-center gap-1 text-xs">
+            <button class="filter-btn active px-3 py-1.5 rounded-xl text-white font-medium bg-white/10 transition-all" data-filter="all">All (<span id="countAll">0</span>)</button>
+            <button class="filter-btn px-3 py-1.5 rounded-xl text-white/60 hover:text-white transition-all" data-filter="missing">Missing (<span id="countMissing">0</span>)</button>
+            <button class="filter-btn px-3 py-1.5 rounded-xl text-white/60 hover:text-white transition-all" data-filter="ready">Ready (<span id="countReady">0</span>)</button>
+          </div>
+        </div>
+
+        <!-- Right: Actions & Tools -->
+        <div class="flex items-center gap-3 w-full lg:w-auto justify-end flex-wrap">
+          <!-- Search -->
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 text-white/40 absolute left-3 top-2.5"></i>
+            <input type="text" id="searchInput" placeholder="Filter posts..." class="apple-glass-inset text-xs rounded-xl pl-9 pr-3 py-2 text-white placeholder-white/30 focus:outline-none focus:border-purple-500/50 w-36 sm:w-44 transition-all">
+          </div>
+
+          <!-- Batch Copy Prompts -->
+          <button id="batchCopyBtn" class="apple-glass-pill hover:bg-white/10 text-white/80 hover:text-white px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all">
+            <i data-lucide="copy" class="w-3.5 h-3.5 text-blue-400"></i>
+            <span class="hidden sm:inline">Export All Prompts</span>
+          </button>
+
+          <!-- Doctor Pre-flight -->
+          <button id="runDoctorBtn" class="apple-glass-pill hover:bg-white/10 text-white/80 hover:text-white px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all">
+            <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>Doctor</span>
+          </button>
+
+          <!-- Schedule Queue to Meta -->
+          <button id="openScheduleModalBtn" class="gradient-btn text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-lg shadow-pink-500/20 hover:scale-105 transition-all">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            <span>Schedule Queue</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- MAIN CARDS GRID (ABSOLUTE UNIFORMITY) -->
+    <main>
+      <div id="postsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+        <!-- Cards will be dynamically injected here with identical dimensions -->
+      </div>
+
+      <!-- Empty State / No Posts Found -->
+      <div id="emptyState" class="hidden text-center py-24 apple-glass rounded-3xl max-w-lg mx-auto p-8">
+        <div class="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="folder-open" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">No Posts in this View</h3>
+        <p class="text-sm text-white/50 mb-6">Try clearing your search filter, or pick a different campaign folder above.</p>
+        <button onclick="clearFilters()" class="gradient-btn text-white text-xs px-5 py-2.5 rounded-xl font-medium">Reset Filters</button>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- FOLDER SELECTOR / RESUME MODAL -->
+  <div id="folderModal" class="fixed inset-0 bg-black/70 backdrop-blur-xl z-50 flex items-center justify-center p-4 hidden">
+    <div class="apple-glass rounded-3xl p-6 md:p-8 max-w-xl w-full border border-white/20 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center border border-purple-500/30">
+            <i data-lucide="folder-cog" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-white">Select Campaign Folder</h3>
+            <p class="text-xs text-white/50">Pick a campaign or enter any custom directory path</p>
+          </div>
+        </div>
+        <button id="closeFolderModalBtn" class="text-white/40 hover:text-white p-2 rounded-xl apple-glass-pill transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Discovered Folders -->
+      <div class="space-y-4 mb-6">
+        <label class="text-xs uppercase tracking-wider text-white/50 font-semibold">Discovered Campaigns</label>
+        <div id="discoveredFoldersList" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+          <!-- Discovered folder rows injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Custom Path Input -->
+      <div class="space-y-2 pt-4 border-t border-white/10">
+        <label class="text-xs uppercase tracking-wider text-white/50 font-semibold">Or Custom Folder Path</label>
+        <div class="flex gap-2">
+          <input type="text" id="customFolderPathInput" placeholder="C:\Users\...\Desktop\Content Engine\campaigns\xyz" class="apple-glass-inset text-xs rounded-xl px-4 py-2.5 text-white placeholder-white/30 flex-1 focus:outline-none focus:border-pink-500/50">
+          <button id="loadCustomFolderBtn" class="gradient-btn text-white text-xs px-5 py-2.5 rounded-xl font-medium flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            <span>Open</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Create New Campaign Section -->
+      <div class="space-y-2 pt-4 border-t border-white/10">
+        <label class="text-xs uppercase tracking-wider text-white/50 font-semibold">Create Fresh Campaign</label>
+        <div class="flex gap-2">
+          <input type="text" id="newCampaignNameInput" placeholder="campaign_folder_name" class="apple-glass-inset text-xs rounded-xl px-4 py-2.5 text-white placeholder-white/30 flex-1 focus:outline-none focus:border-purple-500/50">
+          <button id="createCampaignBtn" class="apple-glass-pill hover:bg-white/10 text-white text-xs px-4 py-2.5 rounded-xl font-medium flex items-center gap-1.5 whitespace-nowrap border border-purple-500/30">
+            <i data-lucide="plus" class="w-3.5 h-3.5 text-purple-400"></i>
+            <span>Create</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL EDIT & ZOOM MODAL -->
+  <div id="editModal" class="fixed inset-0 bg-black/75 backdrop-blur-2xl z-50 flex items-center justify-center p-4 hidden">
+    <div class="apple-glass rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-white/20 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <span id="modalDayPill" class="apple-glass-pill px-3 py-1 rounded-xl text-xs font-bold text-purple-300">Day 01</span>
+          <span id="modalSlotPill" class="apple-glass-pill px-3 py-1 rounded-xl text-xs font-bold text-pink-300">Morning</span>
+          <span id="modalBucketPill" class="apple-glass-pill px-3 py-1 rounded-xl text-xs text-blue-300">The Contrarian</span>
+        </div>
+        <button id="closeEditModalBtn" class="text-white/40 hover:text-white p-2 rounded-xl apple-glass-pill transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Edit Fields -->
+      <div class="space-y-4">
+        <div>
+          <label class="text-xs text-white/50 block mb-1.5 font-medium">Status Caption (Markdown / Bengali / English):</label>
+          <textarea id="modalCaptionInput" rows="6" class="w-full apple-glass-inset rounded-2xl p-4 text-xs text-white placeholder-white/30 focus:outline-none focus:border-purple-500/50 font-sans leading-relaxed resize-none"></textarea>
+        </div>
+
+        <div>
+          <label class="text-xs text-white/50 block mb-1.5 font-medium">Google AI Flow Visual Prompt:</label>
+          <div class="relative">
+            <textarea id="modalPromptInput" rows="3" class="w-full apple-glass-inset rounded-2xl p-4 pr-16 text-xs text-white placeholder-white/30 focus:outline-none focus:border-pink-500/50 font-sans leading-relaxed resize-none"></textarea>
+            <button id="modalCopyPromptBtn" class="absolute right-3 top-3 gradient-btn text-white text-[11px] px-3 py-1.5 rounded-xl font-medium flex items-center gap-1 shadow-md">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-white/10">
+        <span class="text-[11px] text-white/40">Auto-saves to captions.json</span>
+        <button id="savePostChangesBtn" class="gradient-btn text-white text-xs px-6 py-2.5 rounded-xl font-bold flex items-center gap-1.5">
+          <i data-lucide="check" class="w-4 h-4"></i>
+          <span>Save Changes</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULK SCHEDULE MODAL -->
+  <div id="scheduleModal" class="fixed inset-0 bg-black/80 backdrop-blur-2xl z-50 flex items-center justify-center p-4 hidden">
+    <div class="apple-glass rounded-3xl p-6 md:p-8 max-w-xl w-full border border-white/20 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-500 via-pink-500 to-blue-500 text-white flex items-center justify-center shadow-lg shadow-purple-500/30">
+            <i data-lucide="calendar" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-white">Bulk Schedule Queue</h3>
+            <p class="text-xs text-white/50">Schedule posts directly to visitor timeline via Meta API</p>
+          </div>
+        </div>
+        <button id="closeScheduleModalBtn" class="text-white/40 hover:text-white p-2 rounded-xl apple-glass-pill transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div class="apple-glass-inset p-3 rounded-2xl flex items-center justify-between">
+          <span class="text-white/60">Target Page:</span>
+          <span id="schedPageName" class="font-bold text-white flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Daily Cat Blogs (1313044931903107)
+          </span>
+        </div>
+
+        <div>
+          <label class="text-white/50 block mb-1.5 font-medium">Start Date (leave blank for earliest valid slot):</label>
+          <input type="date" id="schedStartDateInput" class="w-full apple-glass-inset rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-500/50">
+        </div>
+
+        <div>
+          <label class="text-white/50 block mb-1.5 font-medium">Daily Slots (comma-separated):</label>
+          <input type="text" id="schedSlotsInput" value="09:00, 14:00, 20:00" class="w-full apple-glass-inset rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-500/50 font-mono">
+        </div>
+
+        <div class="flex items-center justify-between apple-glass-inset p-3 rounded-2xl">
+          <div>
+            <p class="font-bold text-white">Dry Run Simulation</p>
+            <p class="text-[10px] text-white/50">Calculates schedule timeline without publishing to Meta</p>
+          </div>
+          <input type="checkbox" id="schedDryRunCheck" class="w-4 h-4 accent-pink-500 rounded cursor-pointer">
+        </div>
+
+        <div class="flex items-center justify-between apple-glass-inset p-3 rounded-2xl">
+          <div>
+            <p class="font-bold text-white">Reset Resume Journal</p>
+            <p class="text-[10px] text-white/50">Clear past recorded post IDs and schedule from post #1</p>
+          </div>
+          <input type="checkbox" id="schedResetStateCheck" class="w-4 h-4 accent-purple-500 rounded cursor-pointer">
+        </div>
+
+        <div id="schedOutputBox" class="hidden apple-glass-inset p-4 rounded-2xl space-y-2 max-h-48 overflow-y-auto">
+          <!-- Results list injected here -->
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-white/10">
+        <span class="text-[11px] text-white/40" id="schedStatusText">Ready to dispatch</span>
+        <button id="executeScheduleBtn" class="gradient-btn text-white text-xs px-6 py-2.5 rounded-xl font-bold flex items-center gap-1.5 shadow-lg shadow-pink-500/30">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>Launch Queue</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN LIGHTBOX IMAGE MODAL -->
+  <div id="lightboxModal" class="fixed inset-0 bg-black/90 backdrop-blur-2xl z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
+    <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white/60 hover:text-white p-2 rounded-xl apple-glass-pill transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <img id="lightboxImg" src="" alt="Enlarged Post Image" class="max-w-full max-h-[80vh] rounded-3xl border border-white/20 shadow-2xl object-contain">
+      <p id="lightboxCaption" class="mt-4 text-xs text-white/80 font-medium text-center max-w-xl"></p>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 pointer-events-none transition-all duration-300 transform translate-y-10 opacity-0">
+    <div class="apple-glass rounded-2xl px-5 py-3 border border-white/20 shadow-2xl flex items-center gap-3">
+      <div id="toastIcon" class="w-7 h-7 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+      </div>
+      <div>
+        <p id="toastTitle" class="text-xs font-bold text-white">Notification</p>
+        <p id="toastMessage" class="text-[11px] text-white/70">Action completed successfully.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    let campaignData = null;
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let activeEditingPostId = null;
+
+    // Toast helper
+    function showToast(title, message, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+
+      if (isSuccess) {
+        toastIcon.className = "w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center";
+        toastIcon.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+      } else {
+        toastIcon.className = "w-7 h-7 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center";
+        toastIcon.innerHTML = '<i data-lucide="alert-circle" class="w-4 h-4"></i>';
+      }
+      lucide.createIcons();
+
+      toast.classList.remove('translate-y-10', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-10', 'opacity-0');
+      }, 2600);
+    }
+
+    // Copy to clipboard with visual feedback
+    async function copyToClipboard(text, btnElement) {
+      if (!text) {
+        showToast("Empty Prompt", "No prompt found for this post.", false);
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+        if (btnElement) {
+          const originalHTML = btnElement.innerHTML;
+          btnElement.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i><span class="text-emerald-400 font-bold">Copied!</span>';
+          btnElement.classList.add('bg-emerald-500/20', 'border-emerald-500/40');
+          lucide.createIcons();
+
+          setTimeout(() => {
+            btnElement.innerHTML = originalHTML;
+            btnElement.classList.remove('bg-emerald-500/20', 'border-emerald-500/40');
+            lucide.createIcons();
+          }, 2000);
+        }
+        showToast("Copied to Clipboard! 📋", "Ready to paste into Google AI Flow.");
+      } catch (e) {
+        showToast("Copy Failed", "Please copy manually: " + e.message, false);
+      }
+    }
+
+    // Load Campaign Data from Server
+    async function fetchCampaign(folderPath = null) {
+      try {
+        let url = '/api/campaign';
+        if (folderPath) {
+          url += `?folder=${encodeURIComponent(folderPath)}`;
+        }
+        const res = await fetch(url);
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Failed to load campaign");
+        }
+        campaignData = await res.json();
+        renderHeader();
+        renderGrid();
+      } catch (err) {
+        console.error(err);
+        showToast("Error", err.message, false);
+      }
+    }
+
+    // Render Navigation & Progress Header
+    function renderHeader() {
+      if (!campaignData) return;
+
+      document.getElementById('currentFolderName').textContent = campaignData.folder_name;
+      document.getElementById('progressStatsText').textContent = `${campaignData.images_ready} / ${campaignData.total_posts}`;
+      document.getElementById('progressPercentText').textContent = `(${campaignData.completion_percent}%)`;
+      document.getElementById('progressBarFill').style.width = `${campaignData.completion_percent}%`;
+
+      document.getElementById('countAll').textContent = campaignData.total_posts;
+      document.getElementById('countMissing').textContent = campaignData.images_missing;
+      document.getElementById('countReady').textContent = campaignData.images_ready;
+    }
+
+    // Render the Posts Grid with Absolute Uniformity
+    function renderGrid() {
+      const grid = document.getElementById('postsGrid');
+      const emptyState = document.getElementById('emptyState');
+      if (!campaignData || !campaignData.posts) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      const filtered = campaignData.posts.filter(p => {
+        // Filter tabs
+        if (currentFilter === 'missing' && p.is_ready) return false;
+        if (currentFilter === 'ready' && !p.is_ready) return false;
+
+        // Search query
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchCaption = (p.caption || '').toLowerCase().includes(q);
+          const matchPrompt = (p.prompt || '').toLowerCase().includes(q);
+          const matchBucket = (p.bucket || '').toLowerCase().includes(q);
+          const matchDay = `day ${p.day}`.toLowerCase().includes(q);
+          if (!matchCaption && !matchPrompt && !matchBucket && !matchDay) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(post => {
+        const firstImg = post.images && post.images.length > 0 ? post.images[0] : null;
+        const hasImg = firstImg && firstImg.exists;
+
+        // Slot Colors
+        let slotColor = 'text-amber-300 border-amber-400/20 bg-amber-400/10';
+        if (post.slot.toLowerCase() === 'afternoon') {
+          slotColor = 'text-cyan-300 border-cyan-400/20 bg-cyan-400/10';
+        } else if (post.slot.toLowerCase() === 'evening') {
+          slotColor = 'text-violet-300 border-violet-400/20 bg-violet-400/10';
+        }
+
+        return `
+          <div class="apple-glass-card rounded-3xl p-5 flex flex-col justify-between space-y-4 relative group" data-post-id="${post.id}">
+            
+            <!-- 1. HEADER ROW (34px Fixed) -->
+            <div class="flex items-center justify-between gap-2 h-[34px]">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="apple-glass-pill px-2.5 py-1 rounded-xl text-[11px] font-bold text-white tracking-wide">Day ${String(post.day).padStart(2, '0')}</span>
+                <span class="px-2.5 py-1 rounded-xl text-[11px] font-semibold tracking-wide border ${slotColor} capitalize">${post.slot}</span>
+                <span class="apple-glass-pill px-2.5 py-1 rounded-xl text-[11px] text-pink-300 font-medium truncate max-w-[110px]">${post.bucket}</span>
+              </div>
+              <span class="text-xs font-mono font-bold text-white/40">#${String(post.id).padStart(2, '0')}</span>
+            </div>
+
+            <!-- 2. CAPTION SECTION (90px Fixed Height) -->
+            <div class="h-[90px] flex flex-col justify-between relative apple-glass-inset rounded-2xl p-3 cursor-pointer hover:border-purple-500/40 transition-colors" onclick="openEditModal(${post.id})">
+              <p class="text-xs text-white/90 font-sans line-clamp-3 leading-relaxed select-none">
+                ${escapeHTML(post.caption || '(No caption text)')}
+              </p>
+              <div class="flex items-center justify-between pt-1 border-t border-white/5 text-[10px] text-white/40">
+                <span class="flex items-center gap-1 hover:text-pink-400 transition-colors">
+                  <i data-lucide="edit-3" class="w-3 h-3"></i> Edit Caption
+                </span>
+                <span>Click to expand</span>
+              </div>
+            </div>
+
+            <!-- 3. PROMPT SECTION (80px Fixed Height) -->
+            <div class="h-[80px] flex flex-col justify-between apple-glass-inset rounded-2xl p-2.5 relative">
+              <p class="text-[11px] text-white/60 line-clamp-2 leading-tight">
+                ${post.prompt ? escapeHTML(post.prompt) : '<span class="italic text-white/30">No prompt text linked</span>'}
+              </p>
+              <button 
+                onclick="copyToClipboard('${escapeJsString(post.prompt)}', this)" 
+                class="apple-glass-pill hover:bg-white/10 text-white text-[11px] py-1 px-3 rounded-xl font-medium flex items-center justify-center gap-1.5 transition-all w-full border border-purple-500/30 hover:border-pink-500/50"
+              >
+                <i data-lucide="copy" class="w-3 h-3 text-pink-400"></i>
+                <span>📋 Copy Prompt for AI Flow</span>
+              </button>
+            </div>
+
+            <!-- 4. MEDIA CONTAINER (Fixed 1:1 Aspect Ratio ~ 280px) -->
+            <div class="w-full aspect-square rounded-2xl overflow-hidden relative border border-white/10 flex items-center justify-center bg-black/40">
+              ${hasImg ? `
+                <!-- Image State -->
+                <img src="${firstImg.url}" alt="Post Image" class="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105 cursor-pointer" onclick="openLightbox('${firstImg.url}', '${escapeJsString(post.caption)}')">
+                
+                <!-- Overlay Meta Badge -->
+                <div class="absolute top-2.5 left-2.5 apple-glass-pill px-2.5 py-1 rounded-xl text-[10px] font-mono text-white/90 flex items-center gap-1 shadow-lg pointer-events-none">
+                  <i data-lucide="image" class="w-3 h-3 text-emerald-400"></i>
+                  <span>${firstImg.filename}</span>
+                  ${firstImg.size_str ? `<span class="text-white/40">· ${firstImg.size_str}</span>` : ''}
+                </div>
+
+                <!-- Hover Overlay Actions -->
+                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 backdrop-blur-sm">
+                  <button onclick="openLightbox('${firstImg.url}', '${escapeJsString(post.caption)}')" class="apple-glass-pill hover:bg-white/20 text-white p-2 rounded-xl transition-all" title="View Fullsize">
+                    <i data-lucide="zoom-in" class="w-4 h-4 text-cyan-300"></i>
+                  </button>
+                  <label class="gradient-btn text-white text-xs px-3 py-2 rounded-xl font-semibold flex items-center gap-1.5 cursor-pointer shadow-lg" title="Replace Photo">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                    <span>Replace</span>
+                    <input type="file" accept="image/*" class="hidden" onchange="handleFileInput(event, ${post.id})">
+                  </label>
+                  <button onclick="deleteImage(${post.id}, '${firstImg.filename}')" class="apple-glass-pill hover:bg-red-500/20 hover:text-red-300 text-white/80 p-2 rounded-xl transition-colors" title="Delete Photo">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              ` : `
+                <!-- Dropzone State (Same Exact Dimensions) -->
+                <label 
+                  class="w-full h-full border-2 border-dashed border-purple-500/30 hover:border-pink-500/70 hover:bg-white/[0.03] transition-all rounded-2xl flex flex-col items-center justify-center p-6 text-center cursor-pointer group/drop"
+                  ondragover="handleDragOver(event)"
+                  ondragleave="handleDragLeave(event)"
+                  ondrop="handleDrop(event, ${post.id})"
+                >
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-pink-500/20 text-pink-400 border border-pink-500/30 flex items-center justify-center mb-3 group-hover/drop:scale-110 transition-transform shadow-lg shadow-pink-500/10">
+                    <i data-lucide="plus" class="w-6 h-6"></i>
+                  </div>
+                  <span class="text-xs font-bold text-white group-hover/drop:text-pink-300 transition-colors">Drop AI Flow Image</span>
+                  <span class="text-[10px] text-white/40 mt-1">or click to browse from Downloads</span>
+                  <span class="text-[9px] font-mono text-purple-400/70 mt-2 bg-purple-500/10 px-2 py-0.5 rounded-lg border border-purple-500/20">Auto-renames to ${String(post.id).padStart(2, '0')}.jpg</span>
+                  <input type="file" accept="image/*" class="hidden" onchange="handleFileInput(event, ${post.id})">
+                </label>
+              `}
+            </div>
+
+            <!-- 5. FOOTER STATUS BAR (32px Fixed) -->
+            <div class="h-[32px] flex items-center justify-between pt-1 border-t border-white/10 text-xs">
+              ${post.is_ready ? `
+                <div class="flex items-center gap-1.5 text-emerald-400 font-semibold text-[11px]">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Ready to Schedule</span>
+                </div>
+              ` : `
+                <div class="flex items-center gap-1.5 text-amber-400/90 font-medium text-[11px]">
+                  <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                  <span>Awaiting Image</span>
+                </div>
+              `}
+              <span class="text-[11px] font-mono text-white/40">1-to-1 Bound</span>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // Drag and drop event handlers
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.classList.add('dropzone-active');
+    }
+
+    function handleDragLeave(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.classList.remove('dropzone-active');
+    }
+
+    async function handleDrop(e, postId) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.classList.remove('dropzone-active');
+
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        await uploadFile(files[0], postId);
+      }
+    }
+
+    async function handleFileInput(e, postId) {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        await uploadFile(files[0], postId);
+      }
+    }
+
+    // Upload & Auto-Sort Engine
+    async function uploadFile(file, postId) {
+      if (!campaignData || !campaignData.folder_path) {
+        showToast("No Campaign", "Please select a campaign folder first.", false);
+        return;
+      }
+
+      showToast("Uploading & Auto-Renaming...", `Optimizing image for Post #${postId}`);
+
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const base64Data = reader.result;
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              folder: campaignData.folder_path,
+              post_id: postId,
+              image_data: base64Data,
+              filename: file.name
+            })
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || "Upload failed");
+          }
+
+          const data = await res.json();
+          showToast("Photo Linked! ⚡", `Saved as ${data.filename}`);
+          // Refresh campaign data to re-render grid
+          await fetchCampaign(campaignData.folder_path);
+        } catch (err) {
+          showToast("Upload Error", err.message, false);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Delete Image Handler
+    async function deleteImage(postId, filename) {
+      if (!confirm(`Remove ${filename} from Post #${postId}?`)) return;
+
+      try {
+        const res = await fetch('/api/delete_image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            folder: campaignData.folder_path,
+            post_id: postId,
+            filename: filename
+          })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Delete failed");
+        }
+
+        showToast("Photo Removed", `Removed ${filename}`);
+        await fetchCampaign(campaignData.folder_path);
+      } catch (err) {
+        showToast("Delete Error", err.message, false);
+      }
+    }
+
+    // Modal Edit Post
+    function openEditModal(postId) {
+      if (!campaignData) return;
+      const post = campaignData.posts.find(p => p.id === postId);
+      if (!post) return;
+
+      activeEditingPostId = postId;
+      document.getElementById('modalDayPill').textContent = `Day ${String(post.day).padStart(2, '0')}`;
+      document.getElementById('modalSlotPill').textContent = post.slot;
+      document.getElementById('modalBucketPill').textContent = post.bucket;
+      document.getElementById('modalCaptionInput').value = post.caption || '';
+      document.getElementById('modalPromptInput').value = post.prompt || '';
+
+      document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    document.getElementById('closeEditModalBtn').addEventListener('click', () => {
+      document.getElementById('editModal').classList.add('hidden');
+    });
+
+    document.getElementById('modalCopyPromptBtn').addEventListener('click', function() {
+      const prompt = document.getElementById('modalPromptInput').value;
+      copyToClipboard(prompt, this);
+    });
+
+    document.getElementById('savePostChangesBtn').addEventListener('click', async () => {
+      if (!activeEditingPostId || !campaignData) return;
+
+      const caption = document.getElementById('modalCaptionInput').value;
+      const prompt = document.getElementById('modalPromptInput').value;
+
+      try {
+        const res = await fetch('/api/update_post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            folder: campaignData.folder_path,
+            post_id: activeEditingPostId,
+            caption: caption,
+            prompt: prompt
+          })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Save failed");
+        }
+
+        showToast("Changes Saved! ✓", "Updated captions.json successfully.");
+        document.getElementById('editModal').classList.add('hidden');
+        await fetchCampaign(campaignData.folder_path);
+      } catch (err) {
+        showToast("Save Error", err.message, false);
+      }
+    });
+
+    // Folder Selector Modal
+    const folderModal = document.getElementById('folderModal');
+    document.getElementById('openFolderModalBtn').addEventListener('click', async () => {
+      await loadDiscoveredFolders();
+      folderModal.classList.remove('hidden');
+    });
+
+    document.getElementById('closeFolderModalBtn').addEventListener('click', () => {
+      folderModal.classList.add('hidden');
+    });
+
+    async function loadDiscoveredFolders() {
+      const container = document.getElementById('discoveredFoldersList');
+      container.innerHTML = '<div class="text-xs text-white/40 py-2">Discovering campaign folders...</div>';
+
+      try {
+        const res = await fetch('/api/campaigns');
+        const data = await res.json();
+
+        if (!data.campaigns || data.campaigns.length === 0) {
+          container.innerHTML = '<div class="text-xs text-white/40 py-2">No campaigns found in campaigns/ directory.</div>';
+          return;
+        }
+
+        container.innerHTML = data.campaigns.map(c => `
+          <div 
+            onclick="selectFolder('${escapeJsString(c.path)}')" 
+            class="apple-glass-inset hover:border-purple-500/50 p-3 rounded-2xl flex items-center justify-between cursor-pointer transition-all group"
+          >
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center border border-purple-500/30">
+                <i data-lucide="folder" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-white group-hover:text-pink-300 transition-colors">${c.name}</p>
+                <p class="text-[10px] text-white/40 truncate max-w-xs">${c.path}</p>
+              </div>
+            </div>
+            <div class="text-right text-[11px]">
+              <span class="text-white/80 font-semibold">${c.post_count} posts</span>
+              <span class="text-white/40 block text-[10px]">${c.image_count} images</span>
+            </div>
+          </div>
+        `).join('');
+
+        lucide.createIcons();
+      } catch (err) {
+        container.innerHTML = `<div class="text-xs text-red-400 py-2">Failed to load folders: ${err.message}</div>`;
+      }
+    }
+
+    function selectFolder(path) {
+      folderModal.classList.add('hidden');
+      fetchCampaign(path);
+    }
+
+    document.getElementById('loadCustomFolderBtn').addEventListener('click', () => {
+      const input = document.getElementById('customFolderPathInput').value.trim();
+      if (!input) return;
+      selectFolder(input);
+    });
+
+    // Create New Campaign
+    document.getElementById('createCampaignBtn').addEventListener('click', async () => {
+      const input = document.getElementById('newCampaignNameInput').value.trim();
+      if (!input) {
+        showToast("Missing Name", "Please enter a campaign folder name.", false);
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/create_campaign', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: input })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || "Failed to create campaign");
+        }
+        showToast("Campaign Created! 🎉", `Created campaigns/${data.name}`);
+        folderModal.classList.add('hidden');
+        document.getElementById('newCampaignNameInput').value = '';
+        await fetchCampaign(data.path);
+      } catch (err) {
+        showToast("Creation Error", err.message, false);
+      }
+    });
+
+    // Lightbox Modal
+    function openLightbox(url, caption) {
+      const modal = document.getElementById('lightboxModal');
+      document.getElementById('lightboxImg').src = url;
+      document.getElementById('lightboxCaption').textContent = caption || '';
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.add('hidden');
+    }
+
+    // Schedule Modal
+    const scheduleModal = document.getElementById('scheduleModal');
+    document.getElementById('openScheduleModalBtn').addEventListener('click', async () => {
+      if (!campaignData || !campaignData.posts || campaignData.posts.length === 0) {
+        showToast("No Posts", "Campaign has no posts to schedule.", false);
+        return;
+      }
+      const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+      document.getElementById('schedStartDateInput').value = tomorrow;
+
+      try {
+        const res = await fetch('/api/doctor');
+        const doc = await res.json();
+        if (doc.success) {
+          document.getElementById('schedPageName').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> ${doc.page_name} (${doc.page_id})`;
+        }
+      } catch (e) {}
+
+      document.getElementById('schedOutputBox').classList.add('hidden');
+      document.getElementById('schedOutputBox').innerHTML = '';
+      document.getElementById('schedStatusText').textContent = `Ready to schedule ${campaignData.images_ready} ready posts`;
+      scheduleModal.classList.remove('hidden');
+      lucide.createIcons();
+    });
+
+    document.getElementById('closeScheduleModalBtn').addEventListener('click', () => {
+      scheduleModal.classList.add('hidden');
+    });
+
+    document.getElementById('executeScheduleBtn').addEventListener('click', async () => {
+      if (!campaignData || !campaignData.folder_path) return;
+
+      const startDate = document.getElementById('schedStartDateInput').value;
+      const slotsStr = document.getElementById('schedSlotsInput').value;
+      const dryRun = document.getElementById('schedDryRunCheck').checked;
+      const resetState = document.getElementById('schedResetStateCheck').checked;
+      const slots = slotsStr.split(',').map(s => s.trim()).filter(Boolean);
+
+      const btn = document.getElementById('executeScheduleBtn');
+      const statusText = document.getElementById('schedStatusText');
+      const outputBox = document.getElementById('schedOutputBox');
+
+      btn.disabled = true;
+      btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Executing...</span>';
+      lucide.createIcons();
+      statusText.textContent = dryRun ? "Simulating schedule queue..." : "Sending bulk posts to Meta Graph API...";
+
+      try {
+        const res = await fetch('/api/schedule_campaign', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            folder: campaignData.folder_path,
+            start_date: startDate || null,
+            slots: slots,
+            dry_run: dryRun,
+            reset_state: resetState
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || "Scheduling failed");
+        }
+
+        outputBox.classList.remove('hidden');
+        outputBox.innerHTML = `
+          <div class="font-bold text-white mb-2">${data.dry_run ? 'Simulation Successful (Dry-Run)' : 'Queued Successfully on Meta! 🎉'}</div>
+          ${data.results.map(r => `
+            <div class="flex items-center justify-between py-1 border-b border-white/5 text-[11px]">
+              <span class="text-white/80">#${String(r.index).padStart(2, '0')} (Day ${r.day} ${r.slot})</span>
+              <span class="text-white/40">${r.scheduled_time ? r.scheduled_time.replace('T', ' ').slice(0, 16) : ''}</span>
+              <span class="${r.skipped ? 'text-amber-400' : 'text-emerald-400'} font-semibold">${r.status}</span>
+            </div>
+          `).join('')}
+        `;
+
+        showToast(
+          data.dry_run ? "Simulation Done" : "Queued to Meta! ⚡",
+          `${data.results.length} posts processed.`
+        );
+        statusText.textContent = `Completed ${data.results.length} posts`;
+      } catch (err) {
+        showToast("Schedule Failed", err.message, false);
+        statusText.textContent = `Error: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="zap" class="w-4 h-4"></i><span>Launch Queue</span>';
+        lucide.createIcons();
+      }
+    });
+
+    // Batch Copy Prompts
+    document.getElementById('batchCopyBtn').addEventListener('click', () => {
+      if (!campaignData || !campaignData.posts) return;
+
+      const lines = campaignData.posts.map(p => `### Image ${String(p.id).padStart(2, '0')}: Day ${p.day} (${p.slot})\nPrompt: ${p.prompt || 'N/A'}\n`).join('\n---\n\n');
+      copyToClipboard(lines, document.getElementById('batchCopyBtn'));
+    });
+
+    // Doctor Health Check
+    document.getElementById('runDoctorBtn').addEventListener('click', async () => {
+      showToast("Running Meta Doctor...", "Verifying token and posting permissions...");
+      try {
+        const res = await fetch('/api/doctor');
+        const data = await res.json();
+        if (data.success) {
+          showToast("Meta Connected! ✓", `Ready to publish to ${data.page_name} (ID: ${data.page_id})`);
+        } else {
+          showToast("Meta Auth Error", data.error || "Token validation failed", false);
+        }
+      } catch (err) {
+        showToast("Doctor Error", err.message, false);
+      }
+    });
+
+    // Filters & Search
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active', 'bg-white/10', 'text-white');
+          b.classList.add('text-white/60');
+        });
+        btn.classList.add('active', 'bg-white/10', 'text-white');
+        btn.classList.remove('text-white/60');
+        currentFilter = btn.dataset.filter;
+        renderGrid();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderGrid();
+    });
+
+    function clearFilters() {
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      currentFilter = 'all';
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.dataset.filter === 'all') {
+          b.classList.add('active', 'bg-white/10', 'text-white');
+        } else {
+          b.classList.remove('active', 'bg-white/10', 'text-white');
+          b.classList.add('text-white/60');
+        }
+      });
+      renderGrid();
+    }
+
+    // Escape helpers
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function escapeJsString(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '');
+    }
+
+    // Initial Load
+    fetchCampaign();
+  </script>
+</body>
+</html>

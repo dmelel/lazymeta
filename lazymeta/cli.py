@@ -418,5 +418,24 @@ def reset_state_cmd() -> None:
     console.print("[bold green]Local state journal cleared successfully.[/bold green]")
 
 
+@main.command()
+@click.option("--folder", "-f", type=click.Path(path_type=Path), default=None, help="Campaign folder path to load.")
+@click.option("--port", "-p", type=int, default=5000, help="Local port for the studio web server (default 5000).")
+@click.option("--no-browser", is_flag=True, help="Do not open the browser automatically.")
+def studio(folder: Path | None, port: int, no_browser: bool) -> None:
+    """Launch the LazyMeta Apple VisionOS Campaign Studio web app."""
+    import webbrowser
+    from .studio.server import start_studio_server
+
+    print_banner()
+    console.print(f"[bold magenta]⚡ Launching LazyMeta Campaign Studio on http://localhost:{port}[/bold magenta]")
+    console.print("[dim]Apple VisionOS Glassmorphism UI · Auto-Renamer · Real-Time Auto-Sorter[/dim]\n")
+
+    if not no_browser:
+        webbrowser.open(f"http://localhost:{port}")
+
+    start_studio_server(port=port, initial_folder=folder)
+
+
 if __name__ == "__main__":
     main()

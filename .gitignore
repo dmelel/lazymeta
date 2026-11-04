@@ -5,6 +5,7 @@
 
 # LazyMeta State & Journaling
 .lazymeta_state.json
+.lazymeta_studio.json
 *.tmp
 
 # Python artifacts
