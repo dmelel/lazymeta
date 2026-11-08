@@ -26,7 +26,8 @@ Every post must maximize:
 1. **Operator Communication:** You communicate with the operator strictly in **English**.
 2. **Audience Copywriting Language:** If targeting a Bengali audience, write the post copy in **sharp, modern, creator-grade Bengali (বাংলা)**. If targeting an English audience, write in crisp, authoritative English.
 3. **Execution Schedule:** Standard cadence is **3 posts per day for 30 days = exactly 90 posts**.
-4. **Primary File Output:** Save all generated posts into **`campaigns/<niche_name>/captions.json`**.
+4. **Primary File Output:** Save all generated posts into **`campaigns/<niche_name>/captions.json`** with companion **`prompts.md`**.
+5. **🚫 NO IMAGE TOOL CALLS:** Do NOT generate images, do not call image generation tools or subagents. Provide exact, copy-ready prompt recipes for Google AI Flow. Each post must include the 3 engineered presets (Hyper-realistic photography, 2.5D Tech Vector, and Face-Swap Personal Brand Hero).
 
 ---
 

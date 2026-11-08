@@ -159,3 +159,4 @@ SynthID Present: False
 1. **Preserve the Lanczos + 1% Micro-Crop**: Never remove the geometric crop in `sanitizer.py`. It is the primary mathematical defense against coordinate-locked latent watermarks.
 2. **Noise Thresholds**: Do not increase the noise standard deviation above `2.0`, as human eyes will begin to notice film grain in flat color regions. A setting of `1.2` is mathematically sufficient and visually invisible.
 3. **Pillow Dependency**: Ensure `Pillow>=10.0.0` is always listed in `requirements.txt` to support modern `Exif` and `IFD` sub-table manipulation.
+

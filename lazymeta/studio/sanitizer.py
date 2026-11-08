@@ -160,3 +160,4 @@ def sanitize_and_stamp_image(
         "author": author,
         "app_stamp": app_stamp,
     }
+

@@ -1,9 +1,15 @@
-# LAZYMETA PIPELINE & SYSTEM RULES (v3.0)
-## Campaign Folders, JSON/TXT Captions & Automated Scheduling Rules
+# LAZYMETA PIPELINE & SYSTEM RULES (v4.0)
+## Campaign Folders, Multi-Preset Prompts, Studio Workflow & Scheduler
 
 ---
 
-## 1. CAMPAIGN FOLDER STRUCTURE (RECOMMENDED)
+## 1. 🚫 STRICT AGENT RESTRICTION: ZERO IMAGE GENERATION TOOLS
+* **NO Image Generation Tools:** The AI agent must **NEVER** attempt to generate, download, or create image files directly. Do not invoke `image-generator` or background subagents for images.
+* **The Manual Workflow:** The agent provides **ultra-specific, copy-paste-ready prompts** mapped 1-to-1 to each post. The operator pastes them into **Google AI Flow**, downloads the files, and drops them into **LazyMeta Studio** (`python run.py studio`), which handles C2PA stripping, iPhone EXIF stamping, and auto-renaming.
+
+---
+
+## 2. CAMPAIGN FOLDER STRUCTURE
 
 Organizing by campaign folder keeps each niche cleanly isolated and portable:
 
@@ -11,29 +17,23 @@ Organizing by campaign folder keeps each niche cleanly isolated and portable:
 lazymeta/
 ├── campaigns/                   # Store all your 30-day niche campaigns here
 │   ├── webdev_mastery/          # Niche A
-│   │   ├── captions.json        # Structured post data & photo mappings
-│   │   └── images/              # 01.jpg, 02.jpg ... 90.jpg
+│   │   ├── captions.json        # Structured post data, copy & multi-preset prompts
+│   │   ├── prompts.md           # Visual prompt book (all 3 presets per post)
+│   │   └── images/              # 01.jpg, 02.jpg ... 90.jpg (auto-sorted via Studio)
 │   └── ecommerce_growth/        # Niche B
 │       ├── captions.json
+│       ├── prompts.md
 │       └── images/
 ├── content_engine/              # Content generation prompts & guides
 ├── .env                         # Meta API credentials (strictly gitignored)
 └── run.py                       # CLI entry point
 ```
 
-To schedule or preview a campaign, simply run:
-```bash
-python run.py preview --campaign campaigns/webdev_mastery
-python run.py schedule --campaign campaigns/webdev_mastery
-```
-
-*(Note: Traditional root `captions.txt` / `captions.json` and `images/` folder also remain 100% supported if you prefer root execution.)*
-
 ---
 
-## 2. `captions.json` FORMAT (CLEANEST & MACHINE-READABLE)
+## 3. `captions.json` FORMAT (WITH EMBEDDED PROMPTS & PRESETS)
 
-Using `captions.json` eliminates delimiter errors, allows multi-photo carousels, and lets you store prompt metadata right alongside each post:
+Using `captions.json` embeds visual prompt metadata right alongside the post copy for instant 1-click copying in LazyMeta Studio:
 
 ```json
 [
@@ -41,121 +41,66 @@ Using `captions.json` eliminates delimiter errors, allows multi-photo carousels,
     "id": 1,
     "day": 1,
     "slot": "morning",
+    "bucket": "The Contrarian",
     "images": ["01.jpg"],
-    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের কাজ না পাওয়ার কারণ 'কমিউনিকেশন স্কিল'। ⚡\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে...\n\n#FreelanceStrategy #ClientAcquisition"
-  },
-  {
-    "id": 2,
-    "day": 1,
-    "slot": "afternoon",
-    "images": ["02a.jpg", "02b.jpg"],
-    "caption": "This 2-slide carousel breaks down leverage vs brute force! 🚀\n\nSwipe to inspect the architecture."
+    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের কাজ না পাওয়ার কারণ 'কমিউনিকেশন স্কিল'। ⚡\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে...\n\n#FreelanceStrategy #ClientAcquisition",
+    "prompt": "High-end editorial vector illustration, modern 2.5D tech graphic with dramatic cinematic lighting, 1:1 aspect ratio. A stylized silhouette developer standing at the edge of an immense floating dark-slate server monolith... Avoid plastic 3D clay, blurry lines, flat white background.",
+    "prompt_presets": {
+      "hyper_realistic": "Editorial photography, candid shot, 1:1 aspect ratio. A tired but deeply focused young developer sitting by a rain-streaked window at 2:00 AM... Avoid airbrushed plastic skin, cartoon rendering.",
+      "tech_vector": "High-end editorial vector illustration, modern 2.5D tech graphic, 1:1 aspect ratio. A stylized silhouette developer standing at the edge of an immense dark-slate server monolith... Avoid cheesy 3D, white cutouts.",
+      "face_personal_brand": "High-end commercial personal branding portrait, 1:1 aspect ratio. [CREATOR_FACE: Charismatic founder/creator], sitting confidently in a dark-wood acoustic podcast studio... Avoid plastic skin, fake teeth."
+    }
   }
 ]
 ```
 
-* **Single Photo Post:** `"images": ["01.jpg"]` or `"images": "01.jpg"`.
-* **Multi-Photo Carousel:** `"images": ["02a.jpg", "02b.jpg"]`.
-* **Implicit Pairing:** If you leave `"images"` empty or omit it, LazyMeta automatically pairs posts with available files in `images/` sequentially!
+### Key Fields:
+* `"id"`: Sequential post number from 1 to 90.
+* `"images"`: Associated filename(s) in `images/` (e.g. `["01.jpg"]`).
+* `"caption"`: Full post text with pre-fold hooks, staccato body, takeaway, and hashtags.
+* `"prompt"`: The primary prompt that renders in LazyMeta Studio with a 1-click `[ 📋 Copy Prompt for AI Flow ]` button.
+* `"prompt_presets"`: The 3 tailored presets (`hyper_realistic`, `tech_vector`, `face_personal_brand`) giving the operator complete creative freedom.
 
 ---
 
-## 3. `captions.txt` SYNTAX & FORMATTING RULES (ALTERNATIVE)
+## 4. `prompts.md` COMPANION PROMPT BOOK
 
+Alongside `captions.json`, the agent produces `campaigns/<niche>/prompts.md` for easy reading and bulk prompt copying:
 
-1. **The Post Delimiter (`---`):**
-   * Every single post MUST start and end with `---` on its own line.
-   * Never insert `---` inside the post body.
-2. **Explicit Image Header (Optional):**
-   * If you want to explicitly map an image, put `images: [filename]` on the line directly following the opening `---`.
-   * If omitted, LazyMeta automatically maps Post #1 $\rightarrow$ `images/01.jpg`, Post #2 $\rightarrow$ `images/02.jpg`, etc.
-3. **Paragraph Spacing & Newlines:**
-   * Leave a single blank line between paragraphs.
-   * Standard clean newlines are preserved natively by Meta Graph API.
-   * Never use HTML tags like `<br>`.
+```markdown
+# [Campaign Name] - Visual Prompt Catalog (01.jpg - 90.jpg)
 
-### Clean `captions.txt` Example:
-```text
----
-images: 01.jpg
-Line 1: Hook that breaks the scroll ⚡
-Line 2: Retention bridge that deepens intrigue
-Line 3: Open loop cliffhanger that forces "...See more"
+### Image 01: [Post Title / Hook]
+* **Target File**: `images/01.jpg`
+* **Day & Slot**: Day 01 - Morning (09:00 AM)
+* **Bucket**: The Contrarian
+* **Visual Hook Concept**: A lone developer challenging a colossal monolith of legacy code.
 
-Body paragraph with actionable insight.
+#### Preset 1: Hyper-Realistic Editorial Photo
+> Editorial photography, candid 85mm portrait, 1:1 square aspect ratio...
 
-The punchline / epiphany takeaway. 💡
+#### Preset 2: 2.5D Tech Editorial Vector (Recommended)
+> High-end editorial vector illustration, modern 2.5D tech graphic, 1:1 square aspect ratio...
 
-Penalty-free comment question? 👇
-
-#Tag1 #Tag2 #Tag3 #Tag4
----
-images: 02.jpg
-Line 1: Second post hook 🚀
-Line 2: Retention bridge
-Line 3: Open loop cliffhanger
-
-Second post body paragraph.
-
-The punchline takeaway. 💡
-
-Comment question? 👇
-
-#Tag1 #Tag2 #Tag3 #Tag4
----
+#### Preset 3: Face-Copy / Personal Brand Hero
+> High-end commercial personal branding portrait, 1:1 square aspect ratio. [CREATOR_FACE: Founder]...
 ```
 
 ---
 
-## 4. SCHEDULING CADENCE & INTERVALS
+## 5. LAZYMETA STUDIO WORKFLOW
 
-* **Default Cadence:** **3 posts per day for 30 days = 90 posts total**.
-* **Daily Time Slots:** Posts are automatically spaced across optimal mobile engagement hours (e.g. Morning `09:00`, Afternoon `14:00`, Evening `20:00`, or evenly distributed across 480-minute intervals).
-* **Meta Graph API Constraints:** 
-  * Posts must be scheduled at least **10 minutes** in the future.
-  * Posts cannot be scheduled more than **75 days** in the future.
-  * LazyMeta's scheduling engine validates and enforces these bounds automatically.
-
----
-
-## 5. CLI COMMANDS & WORKFLOW
-
-### Step 1: Pre-Flight Doctor Check
-Validate your Meta credentials, Page Access Token, and publishing permissions:
-```bash
-python run.py doctor
+```powershell
+python run.py studio -f campaigns/<niche_name>
 ```
 
-### Step 2: Dry-Run Preview
-Inspect all parsed captions, image pairings, character counts, and calculated timestamps without uploading anything:
-```bash
-# Preview a specific campaign folder (recommended):
-python run.py preview --campaign campaigns/<niche_name>
-
-# Or preview from root:
-python run.py preview
-```
-
-### Step 3: Launch Bulk Scheduler
-Upload media and publish all 90 scheduled posts directly into Meta's servers:
-```bash
-# Launch a specific campaign (recommended):
-python run.py schedule --campaign campaigns/<niche_name>
-
-# Or launch from root:
-python run.py schedule
-```
-*(Once complete, you can shut down your computer. Meta's servers will publish each post on schedule.)*
-
-
-### Step 4: Check Scheduled Status
-View current progress, scheduled counts, and remaining queue:
-```bash
-python run.py status
-```
-
-### Step 5: Reset State (If Needed)
-To re-run or test a fresh schedule:
-```bash
-python run.py reset-state
-```
+1. **Launch Studio**: Starts local Apple VisionOS glassmorphism UI at `http://localhost:5000`.
+2. **1-Click Copy**: Click `[ 📋 Copy Prompt for AI Flow ]` on any post card.
+3. **Generate in Google AI Flow**: Paste into Google AI Flow and download the result.
+4. **Drag & Drop**: Drop the downloaded image right onto the post's dropzone.
+5. **Auto-Sort & Anti-AI Sanitization**:
+   - Auto-renames to `<id:02d>.jpg`.
+   - Strips Google C2PA & SynthID markers.
+   - Injects authentic iPhone 15 Pro EXIF + `r1fat.pages.dev` metadata stamp.
+   - Updates `captions.json` in real time.
+6. **Dispatch Queue**: Once images are ready, click `[ Launch Queue ]` to schedule directly to Meta via Graph API v22.0.

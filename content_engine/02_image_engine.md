@@ -1,98 +1,93 @@
-# LAZYMETA VISUAL PROMPT ENGINE (v3.0)
-## High-Hook Editorial 2.5D Vector Prompts (Zero-Trace Direct Publishing)
+# LAZYMETA GOOGLE AI FLOW PROMPT ENGINE (v4.0)
+## Multi-Preset Visual Architecture · Zero Tool Overhead · Direct Studio Pipeline
 
 ---
 
-## 1. ROLE & CORE OBJECTIVE
-You are an **Elite Visual Prompt Architect, Art Director, and Mobile Scroll-Stop Specialist** for **LazyMeta**.
+## 1. 🚫 STRICT OPERATIONAL RULE: NO DIRECT IMAGE GENERATION
 
-Your mission is to generate **irresistible, thumb-stopping visual prompts** for Google AI Flow, Imagen 3, Midjourney, or Flux that pair 1-to-1 with posts in `campaigns/<niche>/captions.json`.
-
-### The Visual Shift:
-* **Zero Illustrator Trace Overhead:** Nuke Illustrator image-tracing entirely. No auto-trace scripts, no path expansion, no fixing anchor points. Generated images are saved directly into `campaigns/<niche>/images/01.jpg` through `images/90.jpg`.
-* **Nuke Pure White Cutouts:** Flat `#ffffff` backgrounds look like generic, sterile clip-art stickers. We use **rich, atmospheric obsidian slate (`#0B0F17`) backdrops** that command attention in mobile feeds.
-* **The 0.3-Second Scroll-Stop Standard:** Users look at the image before reading any text. The image must look like a **$50,000 custom editorial tech graphic commissioned by Stripe, Linear, or Apple**—sharp, intriguing, high-contrast, uncluttered, and unmistakably premium.
-
+> **CRITICAL AGENT RESTRICTION:**  
+> **DO NOT CALL ANY IMAGE GENERATION TOOLS, APIS, OR SUBAGENTS.**  
+> Never invoke `image-generator`, never execute image creation scripts, and never attempt to produce image files.  
+> The operator manually generates every photo using **Google AI Flow** (powered by Google Imagen 3).  
+>
+> **Your sole responsibility:** Engineer **ultra-specific, highly detailed, production-ready prompt recipes** optimized specifically for Google AI Flow, combining positive art direction, camera parameters, and negative anti-AI exclusions into unified copy-paste blocks.
 
 ---
 
-## 2. ART DIRECTION: THE "EDGY EDITORIAL VECTOR" CRITERIA
+## 2. GOOGLE AI FLOW PROMPT ENGINEERING FORMULA
 
-We do **NOT** make generic photorealistic stock photos, and we do **NOT** make cheap cartoon blobs or plastic 3D AI renders.
+Google AI Flow delivers peak visual fidelity when the prompt combines **Scene Drama + Physical Camera/Art Medium + Lighting Geometry + Embedded Anti-AI Exclusions** in a continuous, high-weight semantic structure.
 
-### 1. Visual Style & Anti-AI Polish
-* **Core Style:** Modern 2.5D tech editorial vector illustration, sleek vector isometric framing, dark-mode glassmorphic digital art.
-* **Inspiration:** *Linear.app product release art, Stripe Press book covers, Kurzgesagt high-tension vector graphics, Apple WWDC keynote visuals, and Figma design system illustrations.*
-* **Anti-AI Craftsmanship:** Crisp geometric silhouettes, razor-sharp contour boundaries, polished matte surfaces. Suppress waxy plastic skin, uncanny valley faces, distorted hands, and noisy AI texture clutter.
-
-### 2. High-Hook Composition (Visual Tension & Metaphor)
-Never prompt a boring person sitting passively at a desk typing. Every visual must feature **instant conceptual tension**:
-* **The Visual Conflict:** A tiny developer calmly debugging a colossal glowing monolith; a scale where 1 clean line of code outweighs 10,000 messy lines; a lone consultant flipping a single lever that powers an entire room of dark-slate mechanical gears.
-* **Focal Simplicity (Low Cognitive Load):** Exactly **1 or 2 dominant focal elements**. The visual punchline must be understood in under 200 milliseconds.
-
-### 3. Atmospheric Backgrounds & Rim Lighting
-* **Background Depth:** Deep, premium dark-mode backgrounds (`#0B0F17` obsidian slate, midnight navy, or dark charcoal graphite) with subtle ambient blueprint grid lines, architectural vector coordinates, or faint particle glow.
-* **Dual-Tone Volumetric Rim Lighting:** Dynamic edge lighting (Electric Cyan + Hot Orange, or Emerald Green + Deep Violet) outlining subject contours so they violently pop out of Facebook and Instagram mobile feeds.
-* **Glassmorphism:** Translucent frosted-glass floating cards, glowing circuit traces, and subtle reflections.
-
-### 4. Minimalist Tech Typography & UI Badges
-Include sharp, laser-etched micro-badges that anchor tech credibility:
-* Clean badges: `STATUS: 200 OK`, `API v2.0`, `0.04ms`, `LEVERAGE: 10X`, `CONVERSION: +50%`.
-* *Rule:* Keep text to 1–3 words max. Never generate long unreadable AI gibberish text walls.
-
-### 5. Aspect Ratio for Mobile Feeds
-* **Primary (Recommended):** `1:1` (Square 1080x1080) or `4:5` (Vertical Portrait 1080x1350) for maximum screen real estate in mobile feeds.
-
----
-
-## 3. PROMPT STRUCTURAL BLUEPRINT
-
-Whenever generating a prompt for a post, format it exactly like this:
-
-```markdown
-### 🖼️ Post [XX] -> `images: [XX].jpg`
-
-**Visual Hook Concept:**
-[2-line explanation of the visual metaphor, conflict, and scroll-stopping reason]
-
-**Main Image Prompt (English):**
-> High-end editorial vector illustration, modern 2.5D tech graphic with dramatic cinematic lighting, [1:1 square / 4:5 portrait] aspect ratio. [CENTRAL METAPHOR & TENSION: e.g. A stylized silhouette professional in side profile standing on a floating dark-slate platform, reaching toward a single glowing neon-emerald circuit switch on an immense server monolith]. Clean geometric silhouettes, rich color depth, sharp vector boundaries with translucent frosted-glass floating UI elements. Minimal sharp UI badge in top corner reading '[MINIMAL BADGE: e.g. STATUS: 200]'. Atmospheric deep obsidian navy background (#0B0F17) with faint subtle blueprint grid lines and glowing vector particles. High-contrast dual-tone volumetric rim lighting in electric cyan and warm amber accentuating the subject contours. Masterpiece digital art, sleek Linear and Stripe editorial tech design aesthetic, hyper-clean vector shapes, zero noise, high visual hook retention, aspect ratio [1:1 / 4:5].
-
-**Negative Prompt (English):**
-> photorealistic human face, realistic skin texture, ugly plastic AI look, distorted hands, blurry lines, low quality, chaotic cluttered background, unreadable messy gibberish text walls, 3d clay render, cheesy cartoon, stock photo, watermark, washed out colors, flat boring white background
+### The Unified Master Prompt Syntax:
+```text
+[STYLE & MEDIUM: e.g. High-end editorial photography / 2.5D tech vector illustration], [COMPOSITION & ASPECT RATIO: 1:1 square / 4:5 mobile portrait]. [CENTRAL SUBJECT & ACTION: Visual tension, emotional expression, dynamic posture]. [ENVIRONMENT & BACKGROUND: Depth, textures, color palette]. [LIGHTING & ATMOSPHERE: Volumetric rim lighting, catchlights, color temperature]. [TECHNICAL RENDERING: 85mm f/1.4 lens, natural skin pores / razor-sharp vector contours]. [EMBEDDED NEGATIVE EXCLUSIONS: Avoid plastic skin, distorted hands, blurry lines, cheesy 3D, CGI gloss, chaotic background, unreadable text walls].
 ```
 
 ---
 
-## 4. FEW-SHOT BENCHMARK EXAMPLES
+## 3. THE 3 OFFICIAL PROMPT PRESETS (PER POST)
 
-### Example 1: Code Architecture / Simplicity Beats Frameworks
-* **Concept:** A developer in dark streetwear holding a single warm-amber glowing key before a giant translucent glass monolith filled with tangled glowing circuits.
-* **Main Prompt:**
-  > High-end editorial vector illustration, modern 2.5D tech graphic of code architecture, 1:1 square aspect ratio. A sleek stylized silhouette developer standing on a clean floating dark-graphite platform, holding a glowing warm-amber key toward an immense translucent glass cube containing glowing circuit nodes and wireframe geometry. A sharp frosted glass badge floats beside it reading 'CORE LOGIC'. Atmospheric deep obsidian background (#0A0E17) with faint geometric coordinate lines. Dramatic cinematic dual-tone rim lighting in electric cobalt blue and vibrant gold outlining the character and glass edges. Clean vector contours, Stripe Press and Linear design aesthetic, visually striking thumb-stopper composition, aspect ratio 1:1.
-* **Negative Prompt:**
-  > realistic face, plastic 3d render, blurry, generic stock photo, messy text walls, ugly hands, chaotic composition, washed out lighting, flat plain white background
-
-### Example 2: The Leverage Principle / Business Scaling
-* **Concept:** A consultant calmly pressing a single cyan button that engages massive dark-slate precision gears, representing output leverage over brute-force hustle.
-* **Main Prompt:**
-  > High-end editorial vector tech illustration depicting leverage versus brute force, 1:1 aspect ratio. Central composition features a stylized faceless professional in side profile wearing a sharp dark blazer, calmly pressing a single glowing neon-cyan power switch on an elegant floating console. In the background, massive interconnected dark-slate mechanical gears and glowing translucent data pipes power up in synchrony. A crisp, sharp status badge reads 'LEVERAGE: 10X'. Deep midnight navy backdrop with subtle ambient light leaks and fine vector measurement lines. Electric cyan and vibrant coral volumetric rim lighting creating extreme edge contrast. Masterpiece vector art, modern tech editorial style, ultra-high engagement visual hook, aspect ratio 1:1.
-* **Negative Prompt:**
-  > photorealism, blurry, cheesy 3D, noise, low resolution, crowded unreadable text, dull flat colors, stock photo, plain white background
+For **every single post** in the campaign, you must engineer **3 distinct prompt presets** so the operator can pick the exact visual aesthetic they want in Google AI Flow:
 
 ---
 
-## 5. AGENT EXECUTION PROTOCOL FOR IMAGE GENERATION
+### 📸 Preset 1: Hyper-Realistic Editorial Photography (People / Realism / Storytelling)
+* **Best Used For:** The War Story, The Relatable Mirror, founder confessions, real-world case studies, and emotional hooks.
+* **Core Style:** High-end 35mm or 85mm f/1.4 editorial portrait, cinematic photojournalism, National Geographic / Vanity Fair tech editorial grade.
+* **Key Visual Elements:** Authentic human skin textures (micro-pores, natural peach fuzz, subtle freckles), genuine emotional tension, volumetric natural lighting (window daylight or dramatic moody rim light), real physical fabric folds.
+* **Negative Exclusions (Inlined):** Suppresses plastic airbrushed skin, wax-figure looks, uncanny valley eyes, distorted extra fingers, and glossy CGI rendering.
+* **Blueprint:**
+  > Editorial photography, cinematic candid shot, [1:1 square / 4:5 portrait] aspect ratio. [SUBJECT & METAPHOR: e.g. A tired but deeply focused young male developer in a dark hoodie sitting by a rain-streaked window at 2:00 AM, looking at a laptop glowing softly with code, holding a lukewarm mug of coffee with a thoughtful expression]. Authentic natural skin texture with visible micro-pores, natural subtle facial asymmetry, lifelike eyes with realistic window light reflections. Shallow depth of field, shot on 85mm f/1.4 lens, soft creamy bokeh background showing a cozy minimalist modern apartment. Atmospheric moody lighting with warm amber desk lamp and cool blue moonlight edge light. Ultra-sharp focus on face, 8k resolution, authentic color grading. Avoid plastic skin, airbrushing, oversaturated colors, distorted hands, cartoon rendering, CGI gloss, flat flash photography.
 
-When generating image prompts for a 30-day queue:
+---
 
-1. **1-to-1 Mapping:** Tag every visual with its explicit file target (`campaigns/<niche>/images/01.jpg` through `90.jpg`), and ensure this matches the `"images"` field in `captions.json`.
-2. **Identify the Core Conflict:** Never depict someone passively sitting. Extract the conceptual dilemma or leverage point from the post.
-3. **Apply the 4 Visual Anchors:**
-   * Atmospheric `#0B0F17` dark obsidian slate background.
-   * Dual-tone volumetric rim lighting (cyan/amber or emerald/violet).
-   * 1 or 2 focal elements maximum (low cognitive load for fast mobile comprehension).
-   * 1 laser-etched micro-badge (`STATUS: 200`, `v2.4`, `API DEPLOYED`, etc.).
-4. **Output Format:** Provide the 2-line Visual Hook Concept, followed by the copy-paste-ready Main Prompt and Negative Prompt.
+### 🎨 Preset 2: Modern 2.5D Tech Editorial Vector (Obsidian & Glassmorphism)
+* **Best Used For:** The Cheat Sheet, The Epiphany, architecture breakdowns, algorithms, coding tips, and SaaS frameworks.
+* **Core Style:** Sleek 2.5D vector tech graphic, dark-mode glassmorphic isometric digital art, Stripe Press / Linear.app / Kurzgesagt editorial aesthetic.
+* **Key Visual Elements:** Deep obsidian `#0B0F17` dark slate backdrop, translucent frosted-glass floating panels, blueprint coordinate grids, glowing neon circuit nodes, sharp geometric silhouettes.
+* **Micro Tech Badges:** Exactly 1 laser-etched status pill (e.g. `STATUS: 200`, `v2.4`, `LEVERAGE: 10X`, `CORE_ENGINE`).
+* **Negative Exclusions (Inlined):** Suppresses photorealistic faces, messy sketch lines, cheap clipart, white cutouts, 3D clay plastic, and unreadable text walls.
+* **Blueprint:**
+  > High-end editorial vector illustration, modern 2.5D tech graphic with dramatic cinematic lighting, [1:1 square / 4:5 portrait] aspect ratio. [METAPHOR & ACTION: e.g. A sleek stylized silhouette professional in side profile standing on a floating dark-graphite platform, turning a single glowing neon-emerald circuit switch on an immense server monolith]. Clean geometric silhouettes, rich color depth, razor-sharp vector boundaries with translucent frosted-glass floating UI cards. Minimal sharp UI badge reading '[BADGE: e.g. STATUS: 200]'. Atmospheric deep obsidian navy background (#0B0F17) with faint subtle blueprint grid lines and glowing vector particles. High-contrast dual-tone volumetric rim lighting in electric cyan and warm amber accentuating subject contours. Masterpiece digital art, sleek Linear and Stripe editorial tech design aesthetic, hyper-clean vector shapes, zero noise, high visual hook retention. Avoid photorealistic human skin, plastic 3D clay, blurry lines, cluttered background, unreadable messy text walls, cheesy cartoon, flat boring white background.
 
+---
 
+### 👤 Preset 3: Face-Copy / Personal Brand Authority Hero (Creator Self-Promotion)
+* **Best Used For:** Personal branding, The Contrarian, authority building, product launches, client acquisition, and founder thought leadership.
+* **Core Style:** High-status personal branding portrait, TED Talk / Keynote speaker / executive studio aesthetic, optimized for Google AI Flow face-swapping or reference image uploads.
+* **Key Visual Elements:** Placeholder tag `[CREATOR_FACE: Reference photo or upload]`, high-authority posture (confident eye contact, open body language, sharp blazer or signature streetwear), premium minimalist architectural background (sound-treated podcast studio, executive glass boardroom, or dark aesthetic loft).
+* **Negative Exclusions (Inlined):** Suppresses stiff unnatural mannequin smiles, distorted collar/clothing, awkward hand poses, cartoon smoothing, and cheap studio backdrops.
+* **Blueprint:**
+  > High-end commercial personal branding portrait, executive keynote authority aesthetic, [1:1 square / 4:5 portrait] aspect ratio. [CREATOR_FACE: Stylized charismatic founder/creator], sitting forward confidently in an ergonomic dark leather chair, making direct engaging eye contact, dressed in a tailored minimalist charcoal blazer over a black crewneck. Modern high-end podcast studio setting in the background with dark wood acoustic slat panels, warm amber ambient backlighting, and a subtle high-end broadcast microphone slightly out of focus. Crisp commercial lighting with soft beauty dish key light and cool cyan edge rim light carving out shoulders. Shot on Hasselblad 100MP, 85mm lens at f/2.0, razor-sharp eye catchlights, lifelike natural skin tone and texture, premium editorial magazine cover quality. Avoid plastic skin smoothing, fake teeth, uncanny valley stare, awkward fingers, distorted logo badges, harsh flash shadows, cheesy stock photo smile.
+
+---
+
+## 4. STANDARD OUTPUT SCHEMA (FOR BATCHES & CAMPAIGNS)
+
+Whenever you generate content for a post, output the visual prompt section in this exact format:
+
+```markdown
+### 🖼️ Visual Prompt Engine -> Post #[ID] (`images: [ID:02d].jpg`)
+**Visual Hook Concept:** [1-sentence explanation of the visual dilemma or scroll-stopping tension]
+
+* **Preset 1 [Realistic Photography]:**
+  > [Copy-Paste Ready Unified Master Prompt for Google AI Flow]
+
+* **Preset 2 [2.5D Tech Vector]:**
+  > [Copy-Paste Ready Unified Master Prompt for Google AI Flow]
+
+* **Preset 3 [Personal Brand Hero / Face-Swap]:**
+  > [Copy-Paste Ready Unified Master Prompt for Google AI Flow]
+
+* **Primary Recommended for LazyMeta Studio (JSON `"prompt"`):**
+  > [The single best preset chosen for this specific post, ready for 1-click clipboard copying]
+```
+
+---
+
+## 5. LAZYMETA STUDIO INTEGRATION
+
+In `campaigns/<niche>/captions.json`, the `"prompt"` field stores the **Primary Recommended Prompt** so that when you run `python run.py studio`:
+1. The 1-Click `[ 📋 Copy Prompt for AI Flow ]` button immediately copies the complete engineered master string.
+2. The operator pastes it into Google AI Flow, downloads the image, and drops it into the card's dropzone.
+3. LazyMeta Studio auto-sanitizes C2PA, stamps `r1fat.pages.dev` + iPhone EXIF, and renames the file to `<id:02d>.jpg`.
