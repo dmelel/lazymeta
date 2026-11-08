@@ -113,3 +113,4 @@ When the operator initiates a campaign:
    ```powershell
    python run.py studio -f campaigns/<niche_name>
    ```
+

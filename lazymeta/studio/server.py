@@ -197,6 +197,14 @@ def load_campaign_data(folder_path: Path) -> dict[str, Any]:
 
     completion_percent = round((images_ready / total_images_needed * 100), 1) if total_images_needed > 0 else 0
 
+    brand_file = folder_path / "brand.json"
+    brand_data = None
+    if brand_file.exists():
+        try:
+            brand_data = json.loads(brand_file.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
     return {
         "folder_name": folder_path.name,
         "folder_path": str(folder_path),
@@ -204,6 +212,7 @@ def load_campaign_data(folder_path: Path) -> dict[str, Any]:
         "images_ready": images_ready,
         "images_missing": total_images_needed - images_ready,
         "completion_percent": completion_percent,
+        "brand": brand_data,
         "posts": enriched_posts,
     }
 

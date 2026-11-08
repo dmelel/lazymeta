@@ -199,6 +199,13 @@
             <span class="font-medium text-white/90" id="currentFolderName">Loading folder...</span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-white/40"></i>
           </button>
+
+          <!-- Brand DNA Pill -->
+          <button id="openBrandModalBtn" class="apple-glass-pill hover:bg-purple-500/20 text-white px-3.5 py-2 rounded-2xl hidden items-center gap-2 text-xs transition-all shadow-sm group border border-purple-500/30">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform"></i>
+            <span class="font-bold text-white/90" id="brandPillName">Brand DNA</span>
+            <span class="text-[10px] text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded-lg border border-purple-500/30 hidden sm:inline" id="brandPillArchetype">Active</span>
+          </button>
         </div>
 
         <!-- Middle: Progress & Fast Filters -->
@@ -440,6 +447,76 @@
     </div>
   </div>
 
+  <!-- BRAND DNA MASTER MODAL -->
+  <div id="brandModal" class="fixed inset-0 bg-black/80 backdrop-blur-2xl z-50 flex items-center justify-center p-4 hidden">
+    <div class="apple-glass rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-white/20 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 text-white flex items-center justify-center shadow-lg shadow-purple-500/30">
+            <i data-lucide="dna" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-bold text-lg text-white" id="brandModalName">Brand DNA</h3>
+              <span class="text-[10px] text-pink-300 bg-pink-500/20 px-2 py-0.5 rounded-lg border border-pink-500/30 font-medium" id="brandModalIndustry">Industry</span>
+            </div>
+            <p class="text-xs text-white/50" id="brandModalHandle">@brand · website.com</p>
+          </div>
+        </div>
+        <button id="closeBrandModalBtn" class="text-white/40 hover:text-white p-2 rounded-xl apple-glass-pill transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <!-- Mission & Transformation -->
+        <div class="apple-glass-inset p-3.5 rounded-2xl space-y-1">
+          <span class="text-white/40 uppercase tracking-wider text-[10px] font-bold block">Mission & Transformation</span>
+          <p class="text-white/90 leading-relaxed" id="brandModalMission"></p>
+        </div>
+
+        <!-- Audience & Insecurities -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="apple-glass-inset p-3.5 rounded-2xl space-y-1.5">
+            <span class="text-white/40 uppercase tracking-wider text-[10px] font-bold block">The 2:00 AM Frustrations</span>
+            <ul class="text-white/80 space-y-1 list-disc list-inside text-[11px]" id="brandModalFrustrations"></ul>
+          </div>
+          <div class="apple-glass-inset p-3.5 rounded-2xl space-y-1.5">
+            <span class="text-white/40 uppercase tracking-wider text-[10px] font-bold block">Core Desires</span>
+            <ul class="text-white/80 space-y-1 list-disc list-inside text-[11px]" id="brandModalDesires"></ul>
+          </div>
+        </div>
+
+        <!-- Voice & Common Enemy -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="apple-glass-inset p-3.5 rounded-2xl space-y-1.5">
+            <span class="text-white/40 uppercase tracking-wider text-[10px] font-bold block">Brand Voice Archetype</span>
+            <p class="text-purple-300 font-bold" id="brandModalArchetype"></p>
+            <p class="text-white/60 text-[11px]" id="brandModalTone"></p>
+          </div>
+          <div class="apple-glass-inset p-3.5 rounded-2xl space-y-1.5">
+            <span class="text-white/40 uppercase tracking-wider text-[10px] font-bold block">The Common Enemy</span>
+            <p class="text-pink-300/90 text-[11px] leading-relaxed" id="brandModalEnemy"></p>
+          </div>
+        </div>
+
+        <!-- Visual Identity -->
+        <div class="apple-glass-inset p-3.5 rounded-2xl space-y-1.5">
+          <span class="text-white/40 uppercase tracking-wider text-[10px] font-bold block">Visual Identity Anchor</span>
+          <div class="flex items-center gap-2 flex-wrap text-[11px]">
+            <span class="apple-glass-pill px-2.5 py-1 rounded-xl text-cyan-300" id="brandModalVisualPreset">Preset</span>
+            <span class="text-white/60" id="brandModalAesthetic">Aesthetic keywords</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-white/10 text-[11px] text-white/40">
+        <span>Stored in brand.json & brand_bible.md</span>
+        <button id="closeBrandModalFooterBtn" class="apple-glass-pill hover:bg-white/10 text-white px-4 py-2 rounded-xl text-xs font-semibold">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- FULLSCREEN LIGHTBOX IMAGE MODAL -->
   <div id="lightboxModal" class="fixed inset-0 bg-black/90 backdrop-blur-2xl z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
     <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
@@ -555,6 +632,18 @@
       document.getElementById('countAll').textContent = campaignData.total_posts;
       document.getElementById('countMissing').textContent = campaignData.images_missing;
       document.getElementById('countReady').textContent = campaignData.images_ready;
+
+      // Brand Pill Update
+      const brandBtn = document.getElementById('openBrandModalBtn');
+      if (campaignData.brand) {
+        brandBtn.classList.remove('hidden');
+        brandBtn.classList.add('flex');
+        document.getElementById('brandPillName').textContent = campaignData.brand.brand_name || 'Brand DNA';
+        document.getElementById('brandPillArchetype').textContent = (campaignData.brand.brand_voice && campaignData.brand.brand_voice.archetype) ? campaignData.brand.brand_voice.archetype : 'DNA Active';
+      } else {
+        brandBtn.classList.add('hidden');
+        brandBtn.classList.remove('flex');
+      }
     }
 
     // Render the Posts Grid with Absolute Uniformity
@@ -1059,6 +1148,45 @@
         btn.innerHTML = '<i data-lucide="zap" class="w-4 h-4"></i><span>Launch Queue</span>';
         lucide.createIcons();
       }
+    });
+
+    // Brand DNA Modal Handlers
+    const brandModal = document.getElementById('brandModal');
+    document.getElementById('openBrandModalBtn').addEventListener('click', () => {
+      if (!campaignData || !campaignData.brand) return;
+      const b = campaignData.brand;
+      document.getElementById('brandModalName').textContent = b.brand_name || 'Brand DNA';
+      document.getElementById('brandModalIndustry').textContent = b.industry || 'Niche';
+      document.getElementById('brandModalHandle').textContent = `${b.handle || ''} · ${b.website || ''}`;
+      document.getElementById('brandModalMission').textContent = b.mission_statement || '(No mission statement specified)';
+      
+      const frustList = document.getElementById('brandModalFrustrations');
+      frustList.innerHTML = (b.target_audience && b.target_audience.core_frustrations) 
+        ? b.target_audience.core_frustrations.map(f => `<li>${escapeHTML(f)}</li>`).join('') 
+        : '<li>(No frustrations recorded)</li>';
+
+      const desList = document.getElementById('brandModalDesires');
+      desList.innerHTML = (b.target_audience && b.target_audience.desires) 
+        ? b.target_audience.desires.map(d => `<li>${escapeHTML(d)}</li>`).join('') 
+        : '<li>(No desires recorded)</li>';
+
+      document.getElementById('brandModalArchetype').textContent = (b.brand_voice && b.brand_voice.archetype) || 'Custom Archetype';
+      document.getElementById('brandModalTone').textContent = (b.brand_voice && b.brand_voice.tone) || '';
+      document.getElementById('brandModalEnemy').textContent = b.the_enemy || '(No specific enemy targeted)';
+
+      document.getElementById('brandModalVisualPreset').textContent = (b.visual_identity && b.visual_identity.primary_preset) ? `Preset: ${b.visual_identity.primary_preset}` : 'Visual Persona';
+      document.getElementById('brandModalAesthetic').textContent = (b.visual_identity && b.visual_identity.aesthetic_keywords) || '';
+
+      brandModal.classList.remove('hidden');
+      lucide.createIcons();
+    });
+
+    document.getElementById('closeBrandModalBtn').addEventListener('click', () => {
+      brandModal.classList.add('hidden');
+    });
+
+    document.getElementById('closeBrandModalFooterBtn').addEventListener('click', () => {
+      brandModal.classList.add('hidden');
     });
 
     // Batch Copy Prompts
