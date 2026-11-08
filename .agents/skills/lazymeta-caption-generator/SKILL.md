@@ -95,9 +95,27 @@ On Facebook mobile feeds, Meta abruptly truncates text after **line 3**.
 If lines 1–3 don't trigger intense curiosity, 95% of your post is never read. Furthermore, Meta's algorithm registers every `...See more` click as a high-intent dwell signal.
 
 **The Golden 3-Line Structure:**
-* **Line 1 (The Pattern Interrupt):** Violate expectations or attack a common myth with a visceral hook ⚡
+* **Line 1 (The Pattern Interrupt):** Violate expectations or attack a common myth with a visceral, punchy hook (use clean punctuation like an Em Dash `—`, never generic AI emojis).
 * **Line 2 (The Retention Bridge):** Disarm skepticism and pull the brain forward.
 * **Line 3 (The Cliffhanger):** Cut off cleanly right before the fold, making it psychologically impossible not to click "...See more".
+
+---
+
+### 2. 🚫 THE STRICT "NO-AI EMOJI" PROTOCOL (Human Typographic Standard)
+AI-generated posts suffer from dead-giveaway emoji footprints that immediately scream "written by ChatGPT":
+* **BANNED AI GIVEAWAY EMOJIS (STRICTLY PROHIBITED):**
+  * ❌ `⚡` (Lightning bolt) — Dead giveaway AI hook marker.
+  * ❌ `💡` (Lightbulb) — Dead giveaway AI takeaway marker.
+  * ❌ `👇` (Pointing down finger) — Cliché AI comment bait.
+  * ❌ `🚀` (Rocket) / `🔥` (Fire) / `✨` (Sparkles) / `📌` (Pushpin) / `🧵` (Thread) — Generic AI hype icons.
+
+* **HUMAN REPLACEMENTS (Clean Typographic Formatting):**
+  * **Em Dash (`—`):** Creates an elegant, high-retention dramatic pause that lets the sentence carry its own gravity.
+  * **Colon (`:`):** Sets up natural suspense before a reveal.
+  * **Natural Ellipsis (`...`):** Organic tension bridge before the fold.
+  * **Bullets (`•` or `-` or numbered `1.`, `2.`):** Sharp, clean executive presentation.
+  * **Conversational Call-to-Action (CTA):** Write genuine conversational endings without pointing hands (e.g., `"আপনার অভিজ্ঞতা কেমন ছিল? নিচে জানাতে পারেন।"`, `"Let me know your perspective in the comments."`).
+  * **Minimalist Rule:** Use emojis **ONLY** when genuinely, organically needed (0 to 1 per post max, strictly niche-specific e.g. `🐾` for pets or `☕` for morning thought, never generic AI hype). Words must do the heavy lifting.
 
 ---
 
@@ -123,7 +141,7 @@ Save the complete campaign to `campaigns/<niche>/captions.json`:
     "slot": "morning",
     "bucket": "The Contrarian",
     "images": ["01.jpg"],
-    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের ক্লায়েন্ট কম পাওয়ার কারণ 'কমিউনিকেশন স্কিল'। ⚡\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে।\nক্লায়েন্টরা আসলে আপনার ইংরেজি ব্যাকরণ দেখে আপনাকে কাজ দেয় না।\n\nতারা দেখে আপনি তাদের ব্যবসার ঝুঁকি ও সময় কমাতে পারছেন কি না।\n\nযখন আপনি বলেন: \"আমি ওয়েবসাইট বানাই\"—আপনি ১০০০ জনের মধ্যে একজন সাধারণ কর্মী।\nকিন্তু যখন বলেন: \"আমি আপনার ল্যান্ডিং পেজের বাউন্স রেট অর্ধেক করে দেব\"—তখন আপনি তাদের বিজনেস পার্টনার।\n\nসার্ভিস বিক্রি বন্ধ করুন। ক্লায়েন্টের জন্য মুনাফা বিক্রি শুরু করুন। 💡\n\nআপনার শেষ ক্লায়েন্ট আপনাকে কোন সমস্যার সমাধানের জন্য হায়ার করেছিল? কমেন্টে শেয়ার করুন! 👇\n\n#FreelanceStrategy #ClientAcquisition #BusinessMindset #AgencyGrowth",
+    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের ক্লায়েন্ট কম পাওয়ার কারণ 'কমিউনিকেশন স্কিল'—\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে।\nক্লায়েন্টরা আসলে আপনার ইংরেজি ব্যাকরণ দেখে আপনাকে কাজ দেয় না।\n\nতারা দেখে আপনি তাদের ব্যবসার ঝুঁকি ও সময় কমাতে পারছেন কি না।\n\nযখন আপনি বলেন: \"আমি ওয়েবসাইট বানাই\"—আপনি ১০০০ জনের মধ্যে একজন সাধারণ কর্মী।\nকিন্তু যখন বলেন: \"আমি আপনার ল্যান্ডিং পেজের বাউন্স রেট অর্ধেক করে দেব\"—তখন আপনি তাদের বিজনেস পার্টনার।\n\nসার্ভিস বিক্রি বন্ধ করুন। ক্লায়েন্টের জন্য মুনাফা বিক্রি শুরু করুন।\n\nআপনার শেষ ক্লায়েন্ট আপনাকে কোন সমস্যার সমাধানের জন্য হায়ার করেছিল? নিচে কমেন্টে জানাতে পারেন।\n\n#FreelanceStrategy #ClientAcquisition #BusinessMindset #AgencyGrowth",
     "prompt": "High-end editorial vector illustration, modern 2.5D tech graphic of business leverage, 1:1 aspect ratio. A sleek stylized silhouette developer in side profile standing before an immense floating dark-slate server monolith turning a single glowing neon-emerald circuit switch. Minimal frosted glass badge reading 'LEVERAGE: 10X'. Deep obsidian slate background (#0B0F17) with subtle blueprint grid lines and glowing particle embers. High-contrast dual-tone volumetric rim lighting in electric emerald and warm amber. Masterpiece vector art, Stripe Press and Linear design aesthetic, hyper-clean vector shapes. Avoid photorealistic face, plastic 3D clay, blurry lines, messy text walls, cheesy cartoon, flat plain white background.",
     "prompt_presets": {
       "hyper_realistic": "Editorial photography, candid shot, 1:1 square aspect ratio. A focused young freelancer sitting at a minimalist wooden desk by a rain-streaked window at 2:00 AM, looking at a laptop with code, holding a warm mug. Authentic natural skin pores, natural facial asymmetry, 85mm f/1.4 lens, moody amber desk light and cool blue moonlight. Avoid airbrushed skin, CGI gloss, cartoon rendering.",

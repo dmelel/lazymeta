@@ -172,7 +172,7 @@ Generate an executive dossier for human review:
 ## 2. Voice & Tone Guidelines
 * **The Personality:** [Archetype description]
 * **Sentence Architecture:** Kinetic staccato pacing. Short punchy lines. Never write more than 2 sentences per paragraph.
-* **Pre-Fold Hook Strategy:** Open every post with a Pattern Interrupt (Line 1) ⚡, Retention Bridge (Line 2), and Cliffhanger Trap (Line 3).
+* **Pre-Fold Hook Strategy:** Open every post with a Pattern Interrupt (Line 1) using an Em Dash `—`, Retention Bridge (Line 2), and Cliffhanger Trap (Line 3). Strictly avoid generic AI emoji clichés (⚡, 💡, 👇, 🚀).
 
 ## 3. The Lexicon
 * **Words We Love:** [List of 10 high-status, brand-aligned terms]

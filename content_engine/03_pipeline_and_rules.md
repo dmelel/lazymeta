@@ -43,7 +43,7 @@ Using `captions.json` embeds visual prompt metadata right alongside the post cop
     "slot": "morning",
     "bucket": "The Contrarian",
     "images": ["01.jpg"],
-    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের কাজ না পাওয়ার কারণ 'কমিউনিকেশন স্কিল'। ⚡\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে...\n\n#FreelanceStrategy #ClientAcquisition",
+    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের কাজ না পাওয়ার কারণ 'কমিউনিকেশন স্কিল'—\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে...\n\n#FreelanceStrategy #ClientAcquisition",
     "prompt": "High-end editorial vector illustration, modern 2.5D tech graphic with dramatic cinematic lighting, 1:1 aspect ratio. A stylized silhouette developer standing at the edge of an immense floating dark-slate server monolith... Avoid plastic 3D clay, blurry lines, flat white background.",
     "prompt_presets": {
       "hyper_realistic": "Editorial photography, candid shot, 1:1 aspect ratio. A tired but deeply focused young developer sitting by a rain-streaked window at 2:00 AM... Avoid airbrushed plastic skin, cartoon rendering.",

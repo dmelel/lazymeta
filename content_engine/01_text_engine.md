@@ -35,32 +35,51 @@ Every post must maximize:
 On Facebook and Instagram mobile feeds, Meta truncates text after **3 lines** behind a `...See more` button. If lines 1–3 don't trigger intense curiosity, your post dies.
 
 ### The 3-Line Anatomy:
-* **Line 1: The Pattern Interrupt (Bold Claim / Shocking Stat / Contrarian Hook) ⚡**
-  * Break the reader's mindless scroll. Say something unexpected, controversial, or viscerally relatable.
+* **Line 1: The Pattern Interrupt (Bold Claim / Shocking Stat / Contrarian Hook)**
+  * Break the reader's mindless scroll using punchy, human words and an Em Dash (`—`).
 * **Line 2: The Retention Bridge**
   * Deepen the intrigue. Validate the hook with high-stakes reality.
 * **Line 3: The Open Loop / Cliffhanger Trap**
   * Leave an incomplete thought, a burning question, or a counterintuitive contradiction that *demands* clicking `...See more`.
 
 ```text
-[Line 1: Pattern Interrupt Hook] ⚡
+[Line 1: Pattern Interrupt Hook]—
 [Line 2: Retention Bridge]
-[Line 3: Open Loop / Cliffhanger]
+[Line 3: Open Loop / Cliffhanger...]
 ------------------------------------ (Meta cuts off here -> User clicks "...See more")
 [Body Paragraph 1]
 
 [Body Paragraph 2]
 
-[The Epiphany Takeaway] 💡
+[The Epiphany Takeaway Statement]
 
-[Penalty-Free Comment Prompt] 👇
+[Penalty-Free Conversational Comment Prompt]
 
 #Tag1 #Tag2 #Tag3 #Tag4
 ```
 
 ---
 
-## 4. PACING & FORMATTING (STACCATO RHYTHM)
+## 4. 🚫 THE "NO-AI EMOJI" PROTOCOL (HUMAN TYPOGRAPHIC REPLACEMENTS)
+Generic AI content always leaks its identity through predictable emoji usage. In LazyMeta campaigns, these clichés are strictly banned:
+
+* **BANNED AI EMOJI CLICHÉS:**
+  * ❌ `⚡` (Lightning bolt) — Dead giveaway AI hook marker.
+  * ❌ `💡` (Lightbulb) — Cliché AI takeaway marker.
+  * ❌ `👇` (Pointing down) — Obvious AI comment bait.
+  * ❌ `🚀` (Rocket) / `🔥` (Fire) / `✨` (Sparkles) / `📌` (Pushpin) — Low-effort AI hype icons.
+
+* **HUMAN TYPOGRAPHIC REPLACEMENTS:**
+  * **Em Dash (`—`):** Creates an elegant, high-retention dramatic pause that lets the sentence carry its own gravity.
+  * **Colon (`:`):** Sets up natural suspense before a reveal.
+  * **Natural Ellipsis (`...`):** Organic tension bridge before the fold.
+  * **Bullets (`•` or `-` or numbered `1.`, `2.`):** Sharp, clean executive presentation.
+  * **Conversational Call-to-Action (CTA):** Write genuine conversational endings without pointing hands (e.g., `"আপনার অভিজ্ঞতা কেমন ছিল? নিচে জানাতে পারেন।"`, `"Let me know your perspective in the comments."`).
+  * **Minimalist Rule:** Use emojis **ONLY** when genuinely, organically needed (0 to 1 per post max, strictly niche-specific e.g. `🐾` for pets or `☕` for morning thought, never generic AI hype). Words must do the heavy lifting.
+
+---
+
+## 5. PACING & FORMATTING (STACCATO RHYTHM)
 Once the reader clicks `...See more`, do **NOT** punish them with a dense wall of text:
 * **Maximum 2 sentences per paragraph.**
 * Always separate paragraphs with a double newline (`\n\n` in JSON).
@@ -120,7 +139,7 @@ All output for a campaign is structured as a single JSON file at `campaigns/<nic
     "slot": "morning",
     "bucket": "The Contrarian",
     "images": ["01.jpg"],
-    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের কাজ না পাওয়ার কারণ 'কমিউনিকেশন স্কিল'। ⚡\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে।\nক্লায়েন্টরা আসলে আপনার ইংরেজি ব্যাকরণ দেখে আপনাকে হায়ার করে না।\n\nতারা দেখে আপনি তাদের ব্যবসার ঝুঁকি ও সময় কমাতে পারছেন কি না।\n\nযখন আপনি বলেন: \"আমি ওয়েবসাইট বানাই\"—আপনি ১০০০ জনের মধ্যে একজন সাধারণ কর্মী।\nকিন্তু যখন বলেন: \"আমি আপনার ল্যান্ডিং পেজের বাউন্স রেট অর্ধেক করে দেব\"—তখন আপনি বিজনেস পার্টনার।\n\nসার্ভিস বিক্রি বন্ধ করুন। ক্লায়েন্টের জন্য মুনাফা বিক্রি শুরু করুন। 💡\n\nআপনার শেষ ক্লায়েন্ট আপনাকে ঠিক কোন সমস্যার সমাধানের জন্য হায়ার করেছিল? নিচে শেয়ার করুন! 👇\n\n#FreelanceStrategy #ClientAcquisition #BusinessMindset #AgencyGrowth"
+    "caption": "অধিকাংশ ফ্রিল্যান্সার ভাবে তাদের কাজ না পাওয়ার কারণ 'কমিউনিকেশন স্কিল'—\nকিন্তু বাস্তব সত্যিটা শুনলে আপনার চোখ কপালে উঠবে।\nক্লায়েন্টরা আসলে আপনার ইংরেজি ব্যাকরণ দেখে আপনাকে হায়ার করে না।\n\nতারা দেখে আপনি তাদের ব্যবসার ঝুঁকি ও সময় কমাতে পারছেন কি না।\n\nযখন আপনি বলেন: \"আমি ওয়েবসাইট বানাই\"—আপনি ১০০০ জনের মধ্যে একজন সাধারণ কর্মী।\nকিন্তু যখন বলেন: \"আমি আপনার ল্যান্ডিং পেজের বাউন্স রেট অর্ধেক করে দেব\"—তখন আপনি বিজনেস পার্টনার।\n\nসার্ভিস বিক্রি বন্ধ করুন। ক্লায়েন্টের জন্য মুনাফা বিক্রি শুরু করুন।\n\nআপনার শেষ ক্লায়েন্ট আপনাকে ঠিক কোন সমস্যার সমাধানের জন্য হায়ার করেছিল? নিচে জানাতে পারেন।\n\n#FreelanceStrategy #ClientAcquisition #BusinessMindset #AgencyGrowth"
   },
   {
     "id": 2,
@@ -128,7 +147,7 @@ All output for a campaign is structured as a single JSON file at `campaigns/<nic
     "slot": "afternoon",
     "bucket": "The Cheat Sheet",
     "images": ["02a.jpg", "02b.jpg"],
-    "caption": "স্ক্রোল থামান। ক্লায়েন্ট হান্টিংয়ের এই ৩-স্টেপ ব্লুপ্রিন্ট আপনার এজেন্সি বদলে দেবে। 🚀\n\n১. সমস্যা চিহ্নিত করুন...\n২. ফ্রেমওয়ার্ক দিন...\n৩. ফলাফল নিশ্চিত করুন...\n\nএই ফ্রেমওয়ার্ক কি আপনি ট্রাই করবেন? 👇\n\n#AgencyScale #LeadGen #Growth"
+    "caption": "স্ক্রোল থামান। ক্লায়েন্ট হান্টিংয়ের এই ৩-স্টেপ ব্লুপ্রিন্ট আপনার এজেন্সির গতি পুরোপুরি বদলে দেবে—\n\n১. সমস্যা চিহ্নিত করুন...\n২. ফ্রেমওয়ার্ক দিন...\n৩. ফলাফল নিশ্চিত করুন...\n\nএই ফ্রেমওয়ার্কটি নিয়ে আপনার মতামত কী? কমেন্টে জানাতে পারেন।\n\n#AgencyScale #LeadGen #Growth"
   }
 ]
 ```
