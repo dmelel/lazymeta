@@ -320,46 +320,127 @@
     </div>
   </div>
 
-  <!-- FULL EDIT & ZOOM MODAL -->
-  <div id="editModal" class="fixed inset-0 bg-black/75 backdrop-blur-2xl z-50 flex items-center justify-center p-4 hidden">
-    <div class="apple-glass rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-white/20 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-white/10">
-        <div class="flex items-center gap-3">
+  <!-- FULL EDIT & ZOOM MODAL (Wide Space-Optimized Studio View) -->
+  <div id="editModal" class="fixed inset-0 bg-black/80 backdrop-blur-2xl z-50 flex items-center justify-center p-3 md:p-6 hidden" onclick="handleEditModalBackdrop(event)">
+    <div class="apple-glass rounded-3xl p-5 md:p-7 max-w-5xl lg:max-w-6xl w-full max-h-[94vh] border border-white/20 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 flex flex-col justify-between overflow-y-auto space-y-4" onclick="event.stopPropagation()">
+      
+      <!-- 1. HEADER ROW -->
+      <div class="flex items-center justify-between pb-3 border-b border-white/10 flex-wrap gap-2">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="modalIdPill" class="font-mono font-bold text-xs text-white/50 bg-white/5 px-2.5 py-1 rounded-xl border border-white/10">#01</span>
           <span id="modalDayPill" class="apple-glass-pill px-3 py-1 rounded-xl text-xs font-bold text-purple-300">Day 01</span>
-          <span id="modalSlotPill" class="apple-glass-pill px-3 py-1 rounded-xl text-xs font-bold text-pink-300">Morning</span>
+          <span id="modalSlotPill" class="apple-glass-pill px-3 py-1 rounded-xl text-xs font-bold text-pink-300 capitalize">Morning</span>
           <span id="modalBucketPill" class="apple-glass-pill px-3 py-1 rounded-xl text-xs text-blue-300">The Contrarian</span>
         </div>
-        <button id="closeEditModalBtn" class="text-white/40 hover:text-white p-2 rounded-xl apple-glass-pill transition-colors">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
+        
+        <div class="flex items-center gap-3">
+          <span id="modalCaptionStats" class="text-xs font-mono text-white/40 hidden sm:inline">0 words · 0 chars</span>
+          <button id="closeEditModalBtn" class="text-white/60 hover:text-white p-2 rounded-xl apple-glass-pill hover:bg-white/10 transition-colors" title="Close (Esc)">
+            <i data-lucide="x" class="w-4 h-4 text-pink-400"></i>
+          </button>
+        </div>
       </div>
 
-      <!-- Edit Fields -->
-      <div class="space-y-4">
-        <div>
-          <label class="text-xs text-white/50 block mb-1.5 font-medium">Status Caption (Markdown / Bengali / English):</label>
-          <textarea id="modalCaptionInput" rows="6" class="w-full apple-glass-inset rounded-2xl p-4 text-xs text-white placeholder-white/30 focus:outline-none focus:border-purple-500/50 font-sans leading-relaxed resize-none"></textarea>
+      <!-- 2. WIDE STUDIO GRID (Utilizing Full Screen Space) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1">
+        
+        <!-- LEFT: STATUS CAPTION FULL FORM (7 Columns) -->
+        <div class="lg:col-span-7 flex flex-col space-y-2">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold uppercase tracking-wider text-pink-300 flex items-center gap-1.5">
+              <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+              <span>Status Caption (Full Post Form)</span>
+            </label>
+            <span class="text-[11px] text-white/40">Bengali / English / Markdown</span>
+          </div>
+          
+          <textarea 
+            id="modalCaptionInput" 
+            rows="16" 
+            placeholder="Write or review your full post caption here..."
+            class="w-full flex-1 apple-glass-inset rounded-2xl p-4 md:p-5 text-sm md:text-[15px] text-white placeholder-white/30 focus:outline-none focus:border-pink-500/50 font-sans leading-relaxed min-h-[440px] resize-y"
+          ></textarea>
         </div>
 
-        <div>
-          <label class="text-xs text-white/50 block mb-1.5 font-medium">Google AI Flow Visual Prompt:</label>
-          <div class="relative">
-            <textarea id="modalPromptInput" rows="3" class="w-full apple-glass-inset rounded-2xl p-4 pr-16 text-xs text-white placeholder-white/30 focus:outline-none focus:border-pink-500/50 font-sans leading-relaxed resize-none"></textarea>
-            <button id="modalCopyPromptBtn" class="absolute right-3 top-3 gradient-btn text-white text-[11px] px-3 py-1.5 rounded-xl font-medium flex items-center gap-1 shadow-md">
-              <i data-lucide="copy" class="w-3 h-3"></i>
-              <span>Copy</span>
+        <!-- RIGHT: PHOTO PREVIEW & PROMPT (5 Columns) -->
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+          
+          <!-- Photo Preview Container -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold uppercase tracking-wider text-purple-300 flex items-center gap-1.5">
+                <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                <span>Attached Visual</span>
+              </label>
+              <span id="modalImageFilename" class="text-[11px] font-mono text-white/40"></span>
+            </div>
+
+            <div class="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-black/40 relative flex items-center justify-center group/preview">
+              <img id="modalImagePreview" src="" alt="Post Visual" class="w-full h-full object-cover rounded-2xl cursor-pointer" onclick="openLightboxFromModal()">
+              
+              <!-- Zoom Button on Hover -->
+              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-xs">
+                <button onclick="openLightboxFromModal()" class="gradient-btn text-white text-xs px-3 py-1.5 rounded-xl font-medium flex items-center gap-1 shadow-lg">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
+                  <span>Enlarge</span>
+                </button>
+              </div>
+
+              <!-- Empty State if no image -->
+              <div id="modalNoImageBox" class="text-center p-4 hidden">
+                <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mx-auto mb-1.5">
+                  <i data-lucide="image-off" class="w-4 h-4"></i>
+                </div>
+                <span class="text-xs text-white/60 block">No photo linked yet</span>
+                <span class="text-[10px] text-white/30">Drop image onto the main grid card</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prompt Container -->
+          <div class="space-y-2 flex-1 flex flex-col justify-end">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span>Google AI Flow Prompt</span>
+              </label>
+            </div>
+
+            <textarea 
+              id="modalPromptInput" 
+              rows="4" 
+              placeholder="Prompt for Google AI Flow / Imagen 3..."
+              class="w-full apple-glass-inset rounded-2xl p-3.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-cyan-500/50 font-sans leading-relaxed resize-y"
+            ></textarea>
+
+            <button 
+              id="modalCopyPromptBtn" 
+              class="apple-glass-pill hover:bg-white/10 text-white text-xs py-2 px-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all w-full border border-cyan-500/30 hover:border-pink-500/50 shadow-sm"
+            >
+              <i data-lucide="copy" class="w-3.5 h-3.5 text-cyan-400"></i>
+              <span>📋 Copy AI Flow Prompt</span>
             </button>
           </div>
+
+        </div>
+
+      </div>
+
+      <!-- 3. FOOTER ROW -->
+      <div class="flex items-center justify-between pt-3 border-t border-white/10">
+        <span class="text-[11px] text-white/40 flex items-center gap-1.5">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>Auto-syncs with captions.json</span>
+        </span>
+        <div class="flex items-center gap-2">
+          <button id="cancelEditModalBtn" class="apple-glass-pill hover:bg-white/10 text-white/70 hover:text-white text-xs px-4 py-2 rounded-xl transition-all">Cancel</button>
+          <button id="savePostChangesBtn" class="gradient-btn text-white text-xs px-6 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-lg shadow-pink-500/20 hover:scale-105 transition-all">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Save Changes</span>
+          </button>
         </div>
       </div>
 
-      <div class="flex items-center justify-between pt-3 border-t border-white/10">
-        <span class="text-[11px] text-white/40">Auto-saves to captions.json</span>
-        <button id="savePostChangesBtn" class="gradient-btn text-white text-xs px-6 py-2.5 rounded-xl font-bold flex items-center gap-1.5">
-          <i data-lucide="check" class="w-4 h-4"></i>
-          <span>Save Changes</span>
-        </button>
-      </div>
     </div>
   </div>
 
@@ -877,25 +958,87 @@
       }
     }
 
-    // Modal Edit Post
+    // Modal Edit Post (Wide Studio Layout with Auto-Sized Full Form Caption)
     function openEditModal(postId) {
       if (!campaignData) return;
       const post = campaignData.posts.find(p => p.id === postId);
       if (!post) return;
 
       activeEditingPostId = postId;
+      document.getElementById('modalIdPill').textContent = `#${String(post.id).padStart(2, '0')}`;
       document.getElementById('modalDayPill').textContent = `Day ${String(post.day).padStart(2, '0')}`;
       document.getElementById('modalSlotPill').textContent = post.slot;
       document.getElementById('modalBucketPill').textContent = post.bucket;
-      document.getElementById('modalCaptionInput').value = post.caption || '';
+      
+      const captionInput = document.getElementById('modalCaptionInput');
+      captionInput.value = post.caption || '';
       document.getElementById('modalPromptInput').value = post.prompt || '';
 
+      // Update image preview in modal
+      const firstImg = post.images && post.images.length > 0 ? post.images[0] : null;
+      const previewImg = document.getElementById('modalImagePreview');
+      const noImgBox = document.getElementById('modalNoImageBox');
+      const filenameLabel = document.getElementById('modalImageFilename');
+
+      if (firstImg && firstImg.exists) {
+        previewImg.src = firstImg.url;
+        previewImg.classList.remove('hidden');
+        noImgBox.classList.add('hidden');
+        filenameLabel.textContent = `${firstImg.filename} ${firstImg.size_str ? '(' + firstImg.size_str + ')' : ''}`;
+      } else {
+        previewImg.classList.add('hidden');
+        noImgBox.classList.remove('hidden');
+        filenameLabel.textContent = 'Awaiting Photo';
+      }
+
+      updateCaptionStats();
       document.getElementById('editModal').classList.remove('hidden');
+      setTimeout(autoResizeCaption, 50);
+      lucide.createIcons();
     }
 
-    document.getElementById('closeEditModalBtn').addEventListener('click', () => {
+    function closeEditModal() {
       document.getElementById('editModal').classList.add('hidden');
+      activeEditingPostId = null;
+    }
+
+    function handleEditModalBackdrop(e) {
+      if (e.target.id === 'editModal') {
+        closeEditModal();
+      }
+    }
+
+    function openLightboxFromModal() {
+      const img = document.getElementById('modalImagePreview');
+      if (img && img.src && !img.classList.contains('hidden')) {
+        openLightbox(img.src);
+      }
+    }
+
+    function autoResizeCaption() {
+      const input = document.getElementById('modalCaptionInput');
+      if (!input) return;
+      input.style.height = 'auto';
+      input.style.height = Math.max(440, input.scrollHeight + 14) + 'px';
+    }
+
+    function updateCaptionStats() {
+      const text = document.getElementById('modalCaptionInput').value || '';
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      const chars = text.length;
+      const statsEl = document.getElementById('modalCaptionStats');
+      if (statsEl) {
+        statsEl.textContent = `${words} words · ${chars.toLocaleString()} chars`;
+      }
+    }
+
+    document.getElementById('modalCaptionInput').addEventListener('input', () => {
+      autoResizeCaption();
+      updateCaptionStats();
     });
+
+    document.getElementById('closeEditModalBtn').addEventListener('click', closeEditModal);
+    document.getElementById('cancelEditModalBtn').addEventListener('click', closeEditModal);
 
     document.getElementById('modalCopyPromptBtn').addEventListener('click', function() {
       const prompt = document.getElementById('modalPromptInput').value;
@@ -926,7 +1069,7 @@
         }
 
         showToast("Changes Saved! ✓", "Updated captions.json successfully.");
-        document.getElementById('editModal').classList.add('hidden');
+        closeEditModal();
         await fetchCampaign(campaignData.folder_path);
       } catch (err) {
         showToast("Save Error", err.message, false);
@@ -1036,12 +1179,33 @@
       document.getElementById('lightboxImg').src = '';
     }
 
-    // Keyboard shortcut to close lightbox on Escape
+    // Keyboard shortcut to close modals on Escape
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
+        const editModal = document.getElementById('editModal');
+        if (editModal && !editModal.classList.contains('hidden')) {
+          closeEditModal();
+          return;
+        }
         const lightbox = document.getElementById('lightboxModal');
         if (lightbox && !lightbox.classList.contains('hidden')) {
           closeLightbox();
+          return;
+        }
+        const brandModal = document.getElementById('brandModal');
+        if (brandModal && !brandModal.classList.contains('hidden')) {
+          brandModal.classList.add('hidden');
+          return;
+        }
+        const folderModal = document.getElementById('folderModal');
+        if (folderModal && !folderModal.classList.contains('hidden')) {
+          folderModal.classList.add('hidden');
+          return;
+        }
+        const schedModal = document.getElementById('scheduleModal');
+        if (schedModal && !schedModal.classList.contains('hidden')) {
+          schedModal.classList.add('hidden');
+          return;
         }
       }
     });
