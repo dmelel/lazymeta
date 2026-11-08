@@ -198,3 +198,4 @@ Generate an executive dossier for human review:
 1. **`lazymeta-caption-generator`**: Reads `brand.json` $\rightarrow$ automatically adopts the tone, vocabulary, and tailored viral angles for all 90 posts without needing manual prompting.
 2. **`lazymeta-vector-prompt-engine`**: Reads `visual_identity` from `brand.json` $\rightarrow$ automatically tunes lighting, color palettes, and presets for Google AI Flow.
 3. **`LazyMeta Studio`**: Displays the active brand badge in the floating navigation header, linking directly to the Brand Bible.
+

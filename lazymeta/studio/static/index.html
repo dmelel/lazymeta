@@ -163,112 +163,95 @@
     }
   </style>
 </head>
-<body class="p-4 md:p-8 relative selection:bg-pink-500/30 selection:text-white">
+<body class="p-3 md:p-5 relative selection:bg-pink-500/30 selection:text-white">
 
   <!-- Ambient Glowing Orbs -->
   <div class="ambient-glow-1 animate-pulse-slow"></div>
   <div class="ambient-glow-2"></div>
   <div class="ambient-glow-3 animate-float-slow"></div>
 
-  <div class="max-w-[1700px] mx-auto relative z-10 space-y-6">
+  <div class="max-w-[1700px] mx-auto relative z-10 space-y-4">
 
-    <!-- FLOATING GLASS NAV ISLAND -->
-    <header class="apple-glass rounded-3xl p-5 sticky top-4 z-40 transition-all duration-300">
-      <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+    <!-- SLIM FLOATING GLASS NAV ISLAND (Space-Optimized) -->
+    <header class="apple-glass rounded-2xl px-4 py-2 sticky top-3 z-40 transition-all duration-300">
+      <div class="flex items-center justify-between gap-3 flex-wrap">
         
         <!-- Left: Logo & Folder Selector -->
-        <div class="flex items-center gap-4 flex-wrap">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 via-pink-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/30 border border-white/20">
-              <i data-lucide="layers" class="w-5 h-5 text-white"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="font-bold text-xl tracking-tight gradient-text-neon">LazyMeta</span>
-                <span class="text-xs uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-white/80 font-semibold border border-white/10">Studio</span>
-              </div>
-              <p class="text-[11px] text-white/50 tracking-wide">VisionOS Glassmorphism Content Engine</p>
-            </div>
+        <div class="flex items-center gap-2.5 flex-shrink-0">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-500 to-blue-500 flex items-center justify-center shadow-md shadow-purple-500/30 border border-white/20">
+            <i data-lucide="layers" class="w-4 h-4 text-white"></i>
           </div>
+          <span class="font-bold text-base tracking-tight gradient-text-neon hidden sm:inline">LazyMeta</span>
 
-          <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
+          <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
 
-          <!-- Campaign Folder Button -->
-          <button id="openFolderModalBtn" class="apple-glass-pill hover:bg-white/10 text-white px-4 py-2 rounded-2xl flex items-center gap-2 text-sm transition-all shadow-sm group">
-            <i data-lucide="folder" class="w-4 h-4 text-purple-400 group-hover:text-pink-400 transition-colors"></i>
-            <span class="font-medium text-white/90" id="currentFolderName">Loading folder...</span>
-            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-white/40"></i>
+          <!-- Campaign Folder Selector -->
+          <button id="openFolderModalBtn" class="apple-glass-pill hover:bg-white/10 text-white px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs transition-all group">
+            <i data-lucide="folder" class="w-3.5 h-3.5 text-purple-400 group-hover:text-pink-400 transition-colors"></i>
+            <span class="font-medium text-white/90 truncate max-w-[130px]" id="currentFolderName">Loading...</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 text-white/40"></i>
           </button>
 
           <!-- Brand DNA Pill -->
-          <button id="openBrandModalBtn" class="apple-glass-pill hover:bg-purple-500/20 text-white px-3.5 py-2 rounded-2xl hidden items-center gap-2 text-xs transition-all shadow-sm group border border-purple-500/30">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform"></i>
-            <span class="font-bold text-white/90" id="brandPillName">Brand DNA</span>
-            <span class="text-[10px] text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded-lg border border-purple-500/30 hidden sm:inline" id="brandPillArchetype">Active</span>
+          <button id="openBrandModalBtn" class="apple-glass-pill hover:bg-purple-500/20 text-white px-2.5 py-1.5 rounded-xl hidden items-center gap-1.5 text-xs transition-all border border-purple-500/30">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400"></i>
+            <span class="font-semibold text-white/90 truncate max-w-[100px]" id="brandPillName">Brand</span>
           </button>
         </div>
 
-        <!-- Middle: Progress & Fast Filters -->
-        <div class="flex items-center gap-3 w-full lg:w-auto justify-center flex-wrap">
-          <!-- Progress Pill -->
-          <div class="apple-glass-pill px-4 py-1.5 rounded-2xl flex items-center gap-3">
-            <div class="text-xs">
-              <span class="text-white/60">Images:</span>
-              <span class="font-bold text-white ml-1" id="progressStatsText">0 / 0</span>
-              <span class="text-pink-400 font-semibold ml-1" id="progressPercentText">(0%)</span>
-            </div>
-            <div class="w-28 h-2 rounded-full bg-white/10 overflow-hidden relative">
-              <div id="progressBarFill" class="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+        <!-- Center: Compact Progress & Segmented Filters -->
+        <div class="flex items-center gap-2.5 flex-shrink-0">
+          <!-- Compact Progress -->
+          <div class="apple-glass-pill px-3 py-1 rounded-xl flex items-center gap-2 text-xs">
+            <span class="font-bold text-white text-[11px]" id="progressStatsText">0 / 0</span>
+            <span class="text-pink-400 font-semibold text-[10px]" id="progressPercentText">0%</span>
+            <div class="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden relative">
+              <div id="progressBarFill" class="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
 
-          <!-- Filter Switcher -->
-          <div class="apple-glass-inset p-1 rounded-2xl flex items-center gap-1 text-xs">
-            <button class="filter-btn active px-3 py-1.5 rounded-xl text-white font-medium bg-white/10 transition-all" data-filter="all">All (<span id="countAll">0</span>)</button>
-            <button class="filter-btn px-3 py-1.5 rounded-xl text-white/60 hover:text-white transition-all" data-filter="missing">Missing (<span id="countMissing">0</span>)</button>
-            <button class="filter-btn px-3 py-1.5 rounded-xl text-white/60 hover:text-white transition-all" data-filter="ready">Ready (<span id="countReady">0</span>)</button>
+          <!-- Segmented Filter Control -->
+          <div class="apple-glass-inset p-0.5 rounded-xl flex items-center text-[11px]">
+            <button class="filter-btn active px-2.5 py-1 rounded-lg text-white font-medium bg-white/10 transition-all" data-filter="all">All (<span id="countAll">0</span>)</button>
+            <button class="filter-btn px-2.5 py-1 rounded-lg text-white/60 hover:text-white transition-all" data-filter="missing">Missing (<span id="countMissing">0</span>)</button>
+            <button class="filter-btn px-2.5 py-1 rounded-lg text-white/60 hover:text-white transition-all" data-filter="ready">Ready (<span id="countReady">0</span>)</button>
           </div>
         </div>
 
         <!-- Right: Actions & Tools -->
-        <div class="flex items-center gap-3 w-full lg:w-auto justify-end flex-wrap">
-          <!-- Search -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <!-- Search Input -->
           <div class="relative">
-            <i data-lucide="search" class="w-4 h-4 text-white/40 absolute left-3 top-2.5"></i>
-            <input type="text" id="searchInput" placeholder="Filter posts..." class="apple-glass-inset text-xs rounded-xl pl-9 pr-3 py-2 text-white placeholder-white/30 focus:outline-none focus:border-purple-500/50 w-36 sm:w-44 transition-all">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-white/40 absolute left-2.5 top-2"></i>
+            <input type="text" id="searchInput" placeholder="Search..." class="apple-glass-inset text-[11px] rounded-xl pl-8 pr-2.5 py-1.5 text-white placeholder-white/30 focus:outline-none focus:border-purple-500/50 w-24 sm:w-32 transition-all">
           </div>
 
-          <!-- Batch Copy Prompts -->
-          <button id="batchCopyBtn" class="apple-glass-pill hover:bg-white/10 text-white/80 hover:text-white px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all">
+          <!-- Action Buttons -->
+          <button id="batchCopyBtn" class="apple-glass-pill hover:bg-white/10 text-white/80 hover:text-white p-2 rounded-xl text-xs transition-all" title="Export All Prompts">
             <i data-lucide="copy" class="w-3.5 h-3.5 text-blue-400"></i>
-            <span class="hidden sm:inline">Export All Prompts</span>
           </button>
 
-          <!-- Doctor Pre-flight -->
-          <button id="runDoctorBtn" class="apple-glass-pill hover:bg-white/10 text-white/80 hover:text-white px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all">
-            <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-400"></i>
-            <span>Doctor</span>
-          </button>
-
-          <!-- Sanitize & Stamp Images -->
-          <button id="sanitizeAllBtn" class="apple-glass-pill hover:bg-purple-500/20 text-white/80 hover:text-white px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all border border-purple-500/20" title="Scrub AI metadata & stamp with LazyMeta and r1fat.pages.dev">
+          <button id="sanitizeAllBtn" class="apple-glass-pill hover:bg-purple-500/20 text-white/80 hover:text-white p-2 rounded-xl text-xs transition-all border border-purple-500/20" title="Sanitize & Stamp All Photos">
             <i data-lucide="shield-check" class="w-3.5 h-3.5 text-purple-400"></i>
-            <span class="hidden sm:inline">Sanitize & Stamp</span>
           </button>
 
-          <!-- Schedule Queue to Meta -->
-          <button id="openScheduleModalBtn" class="gradient-btn text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-lg shadow-pink-500/20 hover:scale-105 transition-all">
+          <button id="runDoctorBtn" class="apple-glass-pill hover:bg-white/10 text-white/80 hover:text-white p-2 rounded-xl text-xs transition-all" title="Run Meta Doctor Pre-Flight">
+            <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-400"></i>
+          </button>
+
+          <!-- Schedule Launch Button -->
+          <button id="openScheduleModalBtn" class="gradient-btn text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-md shadow-pink-500/20 hover:scale-105 transition-all">
             <i data-lucide="send" class="w-3.5 h-3.5"></i>
-            <span>Schedule Queue</span>
+            <span class="hidden sm:inline">Schedule</span>
           </button>
         </div>
 
       </div>
     </header>
 
-    <!-- MAIN CARDS GRID (ABSOLUTE UNIFORMITY) -->
+    <!-- MAIN CARDS GRID (COMPACT & HIGH-DENSITY) -->
     <main>
-      <div id="postsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+      <div id="postsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3.5">
         <!-- Cards will be dynamically injected here with identical dimensions -->
       </div>
 
@@ -694,105 +677,90 @@
         }
 
         return `
-          <div class="apple-glass-card rounded-3xl p-5 flex flex-col justify-between space-y-4 relative group" data-post-id="${post.id}">
+          <div class="apple-glass-card rounded-2xl p-3 flex flex-col justify-between space-y-2 relative group border border-white/10 hover:border-purple-500/40 transition-all duration-200" data-post-id="${post.id}">
             
-            <!-- 1. HEADER ROW (34px Fixed) -->
-            <div class="flex items-center justify-between gap-2 h-[34px]">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="apple-glass-pill px-2.5 py-1 rounded-xl text-[11px] font-bold text-white tracking-wide">Day ${String(post.day).padStart(2, '0')}</span>
-                <span class="px-2.5 py-1 rounded-xl text-[11px] font-semibold tracking-wide border ${slotColor} capitalize">${post.slot}</span>
-                <span class="apple-glass-pill px-2.5 py-1 rounded-xl text-[11px] text-pink-300 font-medium truncate max-w-[110px]">${post.bucket}</span>
+            <!-- 1. COMPACT HEADER (24px) -->
+            <div class="flex items-center justify-between gap-1.5 text-[11px] leading-tight">
+              <div class="flex items-center gap-1.5 truncate">
+                <span class="font-mono font-bold text-white/40 text-[10px]">#${String(post.id).padStart(2, '0')}</span>
+                <span class="apple-glass-pill px-2 py-0.5 rounded-lg font-bold text-white text-[10px]">Day ${String(post.day).padStart(2, '0')}</span>
+                <span class="px-2 py-0.5 rounded-lg text-[10px] font-semibold border ${slotColor} capitalize">${post.slot}</span>
               </div>
-              <span class="text-xs font-mono font-bold text-white/40">#${String(post.id).padStart(2, '0')}</span>
-            </div>
-
-            <!-- 2. CAPTION SECTION (90px Fixed Height) -->
-            <div class="h-[90px] flex flex-col justify-between relative apple-glass-inset rounded-2xl p-3 cursor-pointer hover:border-purple-500/40 transition-colors" onclick="openEditModal(${post.id})">
-              <p class="text-xs text-white/90 font-sans line-clamp-3 leading-relaxed select-none">
-                ${escapeHTML(post.caption || '(No caption text)')}
-              </p>
-              <div class="flex items-center justify-between pt-1 border-t border-white/5 text-[10px] text-white/40">
-                <span class="flex items-center gap-1 hover:text-pink-400 transition-colors">
-                  <i data-lucide="edit-3" class="w-3 h-3"></i> Edit Caption
-                </span>
-                <span>Click to expand</span>
+              <div class="flex items-center gap-1.5 flex-shrink-0">
+                <span class="text-[10px] text-pink-300/80 font-medium truncate max-w-[85px] hidden sm:inline" title="${escapeHTML(post.bucket)}">${escapeHTML(post.bucket)}</span>
+                <span class="w-2 h-2 rounded-full ${post.is_ready ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-amber-400/80'}" title="${post.is_ready ? 'Photo Ready' : 'Awaiting Photo'}"></span>
               </div>
             </div>
 
-            <!-- 3. PROMPT SECTION (80px Fixed Height) -->
-            <div class="h-[80px] flex flex-col justify-between apple-glass-inset rounded-2xl p-2.5 relative">
-              <p class="text-[11px] text-white/60 line-clamp-2 leading-tight">
-                ${post.prompt ? escapeHTML(post.prompt) : '<span class="italic text-white/30">No prompt text linked</span>'}
-              </p>
-              <button 
-                onclick="copyToClipboard('${escapeJsString(post.prompt)}', this)" 
-                class="apple-glass-pill hover:bg-white/10 text-white text-[11px] py-1 px-3 rounded-xl font-medium flex items-center justify-center gap-1.5 transition-all w-full border border-purple-500/30 hover:border-pink-500/50"
-              >
-                <i data-lucide="copy" class="w-3 h-3 text-pink-400"></i>
-                <span>📋 Copy Prompt for AI Flow</span>
-              </button>
-            </div>
-
-            <!-- 4. MEDIA CONTAINER (Fixed 1:1 Aspect Ratio ~ 280px) -->
-            <div class="w-full aspect-square rounded-2xl overflow-hidden relative border border-white/10 flex items-center justify-center bg-black/40">
+            <!-- 2. HERO MEDIA CONTAINER (Aspect 4/3 Space-Optimized) -->
+            <div class="w-full aspect-[4/3] rounded-xl overflow-hidden relative border border-white/10 flex items-center justify-center bg-black/40 group/media">
               ${hasImg ? `
                 <!-- Image State -->
-                <img src="${firstImg.url}" alt="Post Image" class="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105 cursor-pointer" onclick="openLightbox('${firstImg.url}', '${escapeJsString(post.caption)}')">
+                <img src="${firstImg.url}" alt="Post Image" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer" onclick="openLightbox('${firstImg.url}', '${escapeJsString(post.caption)}')">
                 
-                <!-- Overlay Meta Badge -->
-                <div class="absolute top-2.5 left-2.5 apple-glass-pill px-2.5 py-1 rounded-xl text-[10px] font-mono text-white/90 flex items-center gap-1 shadow-lg pointer-events-none">
-                  <i data-lucide="image" class="w-3 h-3 text-emerald-400"></i>
+                <!-- Micro Meta Badge -->
+                <div class="absolute top-2 left-2 apple-glass-pill px-2 py-0.5 rounded-lg text-[9px] font-mono text-white/90 flex items-center gap-1 shadow-md pointer-events-none">
+                  <i data-lucide="image" class="w-2.5 h-2.5 text-emerald-400"></i>
                   <span>${firstImg.filename}</span>
                   ${firstImg.size_str ? `<span class="text-white/40">· ${firstImg.size_str}</span>` : ''}
                 </div>
 
                 <!-- Hover Overlay Actions -->
-                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 backdrop-blur-sm">
-                  <button onclick="openLightbox('${firstImg.url}', '${escapeJsString(post.caption)}')" class="apple-glass-pill hover:bg-white/20 text-white p-2 rounded-xl transition-all" title="View Fullsize">
+                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover/media:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-2 backdrop-blur-xs">
+                  <button onclick="openLightbox('${firstImg.url}', '${escapeJsString(post.caption)}')" class="apple-glass-pill hover:bg-white/20 text-white p-2 rounded-xl transition-all shadow-md" title="View Fullsize">
                     <i data-lucide="zoom-in" class="w-4 h-4 text-cyan-300"></i>
                   </button>
-                  <label class="gradient-btn text-white text-xs px-3 py-2 rounded-xl font-semibold flex items-center gap-1.5 cursor-pointer shadow-lg" title="Replace Photo">
-                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                    <span>Replace</span>
+                  <label class="apple-glass-pill hover:bg-white/20 text-white p-2 rounded-xl transition-all cursor-pointer shadow-md" title="Replace Photo">
+                    <i data-lucide="refresh-cw" class="w-4 h-4 text-pink-300"></i>
                     <input type="file" accept="image/*" class="hidden" onchange="handleFileInput(event, ${post.id})">
                   </label>
-                  <button onclick="deleteImage(${post.id}, '${firstImg.filename}')" class="apple-glass-pill hover:bg-red-500/20 hover:text-red-300 text-white/80 p-2 rounded-xl transition-colors" title="Delete Photo">
-                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                  <button onclick="deleteImage(${post.id}, '${firstImg.filename}')" class="apple-glass-pill hover:bg-red-500/30 hover:text-red-300 text-white/80 p-2 rounded-xl transition-all shadow-md" title="Delete Photo">
+                    <i data-lucide="trash-2" class="w-4 h-4 text-red-400"></i>
                   </button>
                 </div>
               ` : `
-                <!-- Dropzone State (Same Exact Dimensions) -->
+                <!-- Compact Dropzone State -->
                 <label 
-                  class="w-full h-full border-2 border-dashed border-purple-500/30 hover:border-pink-500/70 hover:bg-white/[0.03] transition-all rounded-2xl flex flex-col items-center justify-center p-6 text-center cursor-pointer group/drop"
+                  class="w-full h-full border border-dashed border-purple-500/30 hover:border-pink-500/70 hover:bg-white/[0.04] transition-all flex flex-col items-center justify-center p-3 text-center cursor-pointer group/drop relative bg-black/20"
                   ondragover="handleDragOver(event)"
                   ondragleave="handleDragLeave(event)"
                   ondrop="handleDrop(event, ${post.id})"
                 >
-                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-pink-500/20 text-pink-400 border border-pink-500/30 flex items-center justify-center mb-3 group-hover/drop:scale-110 transition-transform shadow-lg shadow-pink-500/10">
-                    <i data-lucide="plus" class="w-6 h-6"></i>
+                  <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-500/20 to-pink-500/20 text-pink-400 border border-pink-500/30 flex items-center justify-center mb-1.5 group-hover/drop:scale-110 transition-transform shadow-md shadow-pink-500/10">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
                   </div>
-                  <span class="text-xs font-bold text-white group-hover/drop:text-pink-300 transition-colors">Drop AI Flow Image</span>
-                  <span class="text-[10px] text-white/40 mt-1">or click to browse from Downloads</span>
-                  <span class="text-[9px] font-mono text-purple-400/70 mt-2 bg-purple-500/10 px-2 py-0.5 rounded-lg border border-purple-500/20">Auto-renames to ${String(post.id).padStart(2, '0')}.jpg</span>
+                  <span class="text-[11px] font-bold text-white group-hover/drop:text-pink-300 transition-colors">Drop AI Flow Image</span>
+                  <span class="text-[9px] text-white/40 mt-0.5">or click to browse</span>
+                  <span class="text-[8px] font-mono text-purple-300/70 mt-1.5 px-2 py-0.5 rounded-md bg-purple-500/10 border border-purple-500/20">Auto: ${String(post.id).padStart(2, '0')}.jpg</span>
                   <input type="file" accept="image/*" class="hidden" onchange="handleFileInput(event, ${post.id})">
                 </label>
               `}
             </div>
 
-            <!-- 5. FOOTER STATUS BAR (32px Fixed) -->
-            <div class="h-[32px] flex items-center justify-between pt-1 border-t border-white/10 text-xs">
-              ${post.is_ready ? `
-                <div class="flex items-center gap-1.5 text-emerald-400 font-semibold text-[11px]">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>Ready to Schedule</span>
+            <!-- 3. COMPACT CONTENT & ACTION -->
+            <div class="space-y-1.5">
+              <!-- Caption Snippet (Click to Edit) -->
+              <div class="apple-glass-inset p-2.5 rounded-xl cursor-pointer hover:border-purple-500/40 transition-colors group/caption relative" onclick="openEditModal(${post.id})" title="Click to view & edit full caption">
+                <p class="text-[11px] text-white/80 font-sans line-clamp-2 leading-relaxed select-none group-hover/caption:text-white transition-colors">
+                  ${escapeHTML(post.caption || '(No caption text)')}
+                </p>
+                <div class="flex items-center justify-between pt-1 mt-1 border-t border-white/5 text-[9px] text-white/40">
+                  <span class="flex items-center gap-1 group-hover/caption:text-pink-300 transition-colors">
+                    <i data-lucide="edit-3" class="w-2.5 h-2.5"></i> Edit
+                  </span>
+                  <span class="font-mono text-white/30 truncate max-w-[120px]">${post.prompt ? escapeHTML(post.prompt.slice(0, 28)) + '...' : ''}</span>
                 </div>
-              ` : `
-                <div class="flex items-center gap-1.5 text-amber-400/90 font-medium text-[11px]">
-                  <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                  <span>Awaiting Image</span>
-                </div>
-              `}
-              <span class="text-[11px] font-mono text-white/40">1-to-1 Bound</span>
+              </div>
+
+              <!-- 1-Click Copy AI Flow Prompt Button -->
+              <button 
+                onclick="copyToClipboard('${escapeJsString(post.prompt)}', this)" 
+                class="apple-glass-pill hover:bg-white/10 text-white text-[11px] py-1.5 px-3 rounded-xl font-medium flex items-center justify-center gap-1.5 transition-all w-full border border-purple-500/30 hover:border-pink-500/50 group/btn shadow-sm"
+                title="${escapeHTML(post.prompt || 'No prompt available')}"
+              >
+                <i data-lucide="copy" class="w-3 h-3 text-pink-400 group-hover/btn:scale-110 transition-transform"></i>
+                <span class="truncate font-semibold tracking-wide">Copy AI Flow Prompt</span>
+              </button>
             </div>
 
           </div>

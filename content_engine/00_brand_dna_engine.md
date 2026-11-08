@@ -85,3 +85,4 @@ Every campaign folder stores its Brand DNA in `brand.json`:
 * **`01_text_engine.md` & `lazymeta-caption-generator`**: Reads `brand.json` to immediately craft high-retention hooks and 90 post captions in the elevated brand tone.
 * **`02_image_engine.md` & `lazymeta-vector-prompt-engine`**: Adopts the `visual_identity` from `brand.json` to tune color palettes, backgrounds, and presets for Google AI Flow.
 * **`LazyMeta Studio`**: Displays the active brand badge in the floating navigation header with quick access to the brand profile.
+

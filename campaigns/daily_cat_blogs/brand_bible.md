@@ -44,3 +44,4 @@
 * **Signature Aesthetic:** Minimalist Scandinavian apartment interiors, natural light oak wooden flooring, soft morning golden hour sunbeams, cozy hygge atmosphere, ultra-sharp focus on eyes and whiskers.
 * **Color Temperature:** Warm amber (`#F59E0B`), creamy beige, and deep obsidian dark accents (`#0B0F17`).
 * **Inlined Negative Exclusions:** `Avoid plastic skin, cartoon 3D, CGI gloss, chaotic cluttered background, unreadable text walls, washed-out flash photography.`
+
