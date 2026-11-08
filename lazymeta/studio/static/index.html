@@ -501,13 +501,22 @@
   </div>
 
   <!-- FULLSCREEN LIGHTBOX IMAGE MODAL -->
-  <div id="lightboxModal" class="fixed inset-0 bg-black/90 backdrop-blur-2xl z-50 flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
-    <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
-      <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white/60 hover:text-white p-2 rounded-xl apple-glass-pill transition-colors">
-        <i data-lucide="x" class="w-5 h-5"></i>
+  <div id="lightboxModal" class="fixed inset-0 bg-black/92 backdrop-blur-2xl z-50 flex items-center justify-center p-4 md:p-8 hidden" onclick="closeLightbox()">
+    
+    <!-- Top-Right / Side Fixed Close Button -->
+    <button onclick="closeLightbox()" class="fixed top-5 right-5 md:top-8 md:right-8 text-white/70 hover:text-white p-2.5 md:px-4 md:py-2 rounded-2xl apple-glass-pill hover:bg-white/10 transition-all border border-white/20 shadow-2xl flex items-center gap-2 group z-50" title="Close Preview (Esc)">
+      <i data-lucide="x" class="w-5 h-5 group-hover:rotate-90 transition-transform duration-200 text-pink-400"></i>
+      <span class="text-xs font-semibold hidden sm:inline">Close</span>
+    </button>
+
+    <!-- Main Full Preview Container (Zero Text Underneath) -->
+    <div class="relative max-w-[94vw] max-h-[92vh] flex items-center justify-center" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="Enlarged Post Image" class="max-w-full max-h-[90vh] rounded-2xl md:rounded-3xl border border-white/20 shadow-2xl object-contain select-none">
+      
+      <!-- In-Image Corner Close Button (On the side/corner of image) -->
+      <button onclick="closeLightbox()" class="absolute top-3 right-3 text-white/80 hover:text-white p-2 rounded-xl apple-glass-pill hover:bg-white/20 transition-all border border-white/20 shadow-lg" title="Close Preview">
+        <i data-lucide="x" class="w-4 h-4 text-pink-300"></i>
       </button>
-      <img id="lightboxImg" src="" alt="Enlarged Post Image" class="max-w-full max-h-[80vh] rounded-3xl border border-white/20 shadow-2xl object-contain">
-      <p id="lightboxCaption" class="mt-4 text-xs text-white/80 font-medium text-center max-w-xl"></p>
     </div>
   </div>
 
@@ -1013,18 +1022,29 @@
       }
     });
 
-    // Lightbox Modal
-    function openLightbox(url, caption) {
+    // Lightbox Modal (Clean Full Image Preview - No Text Underneath)
+    function openLightbox(url) {
       const modal = document.getElementById('lightboxModal');
       document.getElementById('lightboxImg').src = url;
-      document.getElementById('lightboxCaption').textContent = caption || '';
       modal.classList.remove('hidden');
       lucide.createIcons();
     }
 
     function closeLightbox() {
-      document.getElementById('lightboxModal').classList.add('hidden');
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.add('hidden');
+      document.getElementById('lightboxImg').src = '';
     }
+
+    // Keyboard shortcut to close lightbox on Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const lightbox = document.getElementById('lightboxModal');
+        if (lightbox && !lightbox.classList.contains('hidden')) {
+          closeLightbox();
+        }
+      }
+    });
 
     // Schedule Modal
     const scheduleModal = document.getElementById('scheduleModal');
