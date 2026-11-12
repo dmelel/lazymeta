@@ -418,6 +418,13 @@ def reset_state_cmd() -> None:
     console.print("[bold green]Local state journal cleared successfully.[/bold green]")
 
 
+@main.command(name="get-token")
+def get_token_cmd() -> None:
+    """Interactively convert a short-lived token into a NEVER-EXPIRING Page Token and update .env."""
+    from scripts.get_token import get_token_flow
+    get_token_flow()
+
+
 @main.command()
 @click.option("--folder", "-f", type=click.Path(path_type=Path), default=None, help="Campaign folder path to load.")
 @click.option("--port", "-p", type=int, default=5000, help="Local port for the studio web server (default 5000).")
